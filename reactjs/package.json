@@ -1,5 +1,7 @@
 {
   "devDependencies": {
-    "@babel/preset-react": "^7.12.13"
+    "@babel/preset-react": "^7.12.13",
+    "webpack": "^5.25.1",
+    "webpack-cli": "^4.5.0"
   }
 }

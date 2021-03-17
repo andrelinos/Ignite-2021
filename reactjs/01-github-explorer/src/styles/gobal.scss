@@ -5,11 +5,21 @@
 }
 
 body {
-  font: Arial, Helvetica, sans-serif;
-  background: #333;
+  font: 1rem "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background: #222;
   color: #fff;
 
   h1 {
-    font-size: 80px;
+    font-size: 2rem;
+    color: #fd951f;
+  }
+
+  strong {
+    color: #04d361;
+  }
+
+  a {
+    color: #7159c1;
+    text-decoration: none;
   }
 }

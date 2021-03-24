@@ -1,21 +1,21 @@
 section.repository-list {
-  margin: 2.5rem;
+  margin: 2.5rem; // 40px
 
   h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; // 16px
   }
 
   ul {
 
     li {
       & + li {
-        margin-top: 1.25rem;
+        margin-top: 1.25rem; // 20px
       }
 
       p {
-        font-size: 0.875rem;
+        font-size: 0.875rem; // 14px
         color: #b4b4b4;
-        margin-top: 0.5rem;
+        margin-top: 0.5rem; // 8px
       }
 
       a {

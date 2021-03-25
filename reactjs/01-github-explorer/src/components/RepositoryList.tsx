@@ -5,6 +5,10 @@ import '../styles/repositories.scss';
 
 interface Repository {
   name: string;
+  owner: {
+    login: string;
+    avatar_url: string;
+  };
   description: string;
   html_url: string;
 }

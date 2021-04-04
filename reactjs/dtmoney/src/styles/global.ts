@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
      --blue: #5429cc;
      --blue-light: #6933ff;
      --green: #33CC95;
+     --white: #ffffff;
      --text-title: #363f5f;
      --text-body: #969cb3;
      --shape: #ffffff;
@@ -16,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    outline-color: rgba(50, 115, 220, 0.3);
   }
 
   html {
@@ -45,6 +47,12 @@ export const GlobalStyle = createGlobalStyle`
 
   button {
     cursor: pointer;
+
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.95);
+    }
   }
 
   ul {

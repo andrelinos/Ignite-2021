@@ -50,11 +50,11 @@ export const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
 
-    transition: filter 0.2s;
-
     &:hover {
       filter: brightness(0.95);
     }
+
+    transition: all 0.2s;
   }
 
   ul {

@@ -1,7 +1,12 @@
-import styles from '../styles/global.module.css';
+import { Head } from 'next/document';
 
 export default function Home() {
   return (
-   <h1>Hello Andrelino</h1>
+    <>
+      <Head>
+        <title>Início | ig.news</title>
+      </Head>
+      <h1>Hello Andrelino Silva</h1>
+    </>
   )
 }

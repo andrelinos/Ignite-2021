@@ -4,7 +4,7 @@ import { fauna } from '../../../services/fauna';
 import { stripe } from '../../../services/stripe';
 
 export async function saveSubscription(
-  subscriptioId: string,
+  subscriptionId: string,
   customerId: string,
 ) {
   const userRef = await fauna.query(
@@ -19,7 +19,7 @@ export async function saveSubscription(
     )
   );
 
-  const subscription = await stripe.subscriptions.retrieve(subscriptioId);
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
 
   const subscriptionData = {
     id: subscription.id,
@@ -28,11 +28,15 @@ export async function saveSubscription(
     price_id: subscription.items.data[0].price.id,
   };
 
-  await fauna.query(
-    q.Create(
-      q.Collection('subscription'),
-      { data: subscriptionData },
-    ),
-  );
+  try {
+    await fauna.query(
+      q.Create(
+        q.Collection('subscriptions'),
+        { data: subscriptionData },
+      ),
+    );
+  } catch (err) {
+    throw new Error('Error save subscriptions.');
+  }
 
 };

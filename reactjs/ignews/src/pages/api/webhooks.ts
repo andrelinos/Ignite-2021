@@ -10,7 +10,7 @@ async function buffer(readable: Readable) {
 
   for await (const chunk of readable) {
     chunks.push(
-      typeof chunk === 'string' ? Buffer.from(chunk) : chunk,
+      typeof chunk === 'string' ? Buffer.from(chunk) : chunk
     );
   }
 
@@ -19,12 +19,12 @@ async function buffer(readable: Readable) {
 
 export const config = {
   api: {
-    bodyParser: false,
-  },
+    bodyParser: false
+  }
 };
 
 const relevantEvents = new Set([
-  'checkout.session.completed',
+  'checkout.session.completed'
 ]);
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
@@ -44,10 +44,13 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
 
     if (relevantEvents.has(type)) {
       try {
+        console.log(`Webhooks checkoutSession: ${relevantEvents}`);
         switch (type) {
           case 'checkout.session.completed':
 
             const checkoutSession = event.data.object as Stripe.Checkout.Session;
+
+            console.log(`Webhooks checkoutSession: Entrou no switch`);
 
             await saveSubscription(
               checkoutSession.subscription.toString(),
@@ -57,7 +60,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
             break;
           default:
             throw new Error('Unhandled event.');
-        }
+        };
       } catch (err) {
         return response.json({ error: 'Webhook handler failed.' });
       }

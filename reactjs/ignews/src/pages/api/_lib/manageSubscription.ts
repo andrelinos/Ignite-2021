@@ -6,6 +6,7 @@ import { stripe } from '../../../services/stripe';
 export async function saveSubscription(
   subscriptionId: string,
   customerId: string,
+  createAction = false,
 ) {
   const userRef = await fauna.query(
     q.Select(
@@ -28,15 +29,54 @@ export async function saveSubscription(
     price_id: subscription.items.data[0].price.id,
   };
 
-  try {
+  if (createAction) {
+    try {
+      await fauna.query(
+        q.If(
+          q.Not(
+            q.Exists(
+              q.Match(
+                q.Index('subscription_by_id'),
+                q.Casefold(subscription.id)
+              )
+            )
+          ),
+          q.Create(
+            q.Collection('subscriptions'),
+            {
+              data: subscriptionData
+            },
+          ),
+          q.Get(
+            q.Match(
+              q.Index('subscription_by_id'),
+              q.Casefold(subscription.id)
+            )
+          )
+        )
+        /* q.Create(
+          q.Collection('subscriptions'),
+          { data: subscriptionData },
+        ), */
+      );
+    } catch (err) {
+      throw new Error('Error save subscriptions.');
+    }
+  } else {
     await fauna.query(
-      q.Create(
-        q.Collection('subscriptions'),
-        { data: subscriptionData },
-      ),
-    );
-  } catch (err) {
-    throw new Error('Error save subscriptions.');
+      q.Replace(
+        q.Select(
+          "ref",
+          q.Get(
+            q.Match(
+              q.Index('subscription_by_id'),
+              subscriptionId,
+            )
+          )
+        ),
+        { data: subscriptionData }
+      )
+    )
   }
 
 };

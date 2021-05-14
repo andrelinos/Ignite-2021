@@ -19,7 +19,7 @@ export default function Home({ product }: HomeProps) {
       <Head>
         <title>Home | ig.news</title>
       </Head>
-      
+
       <main className={styles.contentContainer}>
         <section className={styles.hero}>
           <span>👏 Hey, welcome</span>
@@ -38,7 +38,7 @@ export default function Home({ product }: HomeProps) {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const price = await stripe.prices.retrieve('price_1IkROdL1D4bzO7lGKFC5FqHp', {
+  const price = await stripe.prices.retrieve('price_1IqyfiL1D4bzO7lGpwrcbLmC', {
     expand: ['product']
   });
 

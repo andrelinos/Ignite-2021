@@ -15,7 +15,7 @@ export function Header() {
     >
       <Text
         w="64"
-        fontSize="xl"
+        fontSize="xx-large"
         fontWeight="bold"
         letterSpacing="tight"
       >

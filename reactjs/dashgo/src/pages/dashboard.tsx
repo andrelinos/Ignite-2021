@@ -9,10 +9,6 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidbar";
 
-interface OptionProps {
-  type?: 'datatime';
-}
-
 const options = {
   chart: {
     toolbar: {
@@ -33,7 +29,7 @@ const options = {
     enabled: false,
   },
   xaxis: {
-    type: 'datetime',
+    type: 'datetime' as const, // pode ser resolvido mudando de XAXIS => YAXIS também
     axisBorder: {
       color: theme.colors.gray[600],
     },
@@ -48,7 +44,17 @@ const options = {
       '2021-05-21T23:59:59-03:00',
       '2021-05-22T23:59:59-03:00',
       '2021-05-23T23:59:59-03:00',
-    ]
+    ],
+    labels: {
+      show: true,
+      datetimeUTC: true,
+      datetimeFormater: {
+        year: 'yyyy',
+        month: "MM",
+        day: 'dd',
+        hour: 'HH:mm'
+      }
+    },
   },
   fill: {
     opacity: 0.3,
@@ -86,7 +92,7 @@ export default function Dashboard() {
             pb="4"
           >
             <Text fontSize="lg" mb="4">Inscritos da semana</Text>
-            <Chart options={options} series={series} type="area" height={160} />
+            <Chart options={options} series={series} type="histogram" height={160} />
           </Box>
           <Box
             p="8"

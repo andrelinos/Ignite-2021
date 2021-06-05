@@ -13,7 +13,7 @@ interface InputProps extends CkInputProps {
 export function Input({ name, label, ...rest }: InputProps) {
   return (
     <FormControl>
-      <FormLabel htmlFor="email">E-mail</FormLabel>
+      <FormLabel htmlFor="email">{label}</FormLabel>
       <CkInput
         id={name}
         name={name}

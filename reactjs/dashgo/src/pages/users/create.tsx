@@ -1,19 +1,12 @@
 import {
-  Box,
-  Button,
-  Divider,
-  Flex, Heading,
-  HStack,
-  SimpleGrid,
-  VStack,
- } from "@chakra-ui/react";
+  Box, Button, Divider, Flex, Heading, HStack, SimpleGrid, VStack,
+} from '@chakra-ui/react';
 
-import { Input } from "../../components/Form/Input";
-import { Header } from "../../components/Header";
-import { Sidebar } from "../../components/Sidbar";
+import { Input } from '../../components/Form/Input';
+import { Header } from '../../components/Header';
+import { Sidebar } from '../../components/Sidebar';
 
 export default function CreateUser() {
-
   return (
     <Box>
       <Header />
@@ -48,5 +41,5 @@ export default function CreateUser() {
         </Box>
       </Flex>
     </Box>
-  )
+  );
 }

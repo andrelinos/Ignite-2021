@@ -1,8 +1,9 @@
+
 import {
   FormControl,
   FormLabel,
   Input as CkInput,
-  InputProps as CkInputProps
+  InputProps as CkInputProps,
 } from '@chakra-ui/react';
 
 interface InputProps extends CkInputProps {
@@ -22,11 +23,11 @@ export function Input({ name, label, ...rest }: InputProps) {
         bgColor="gray.900"
         variant="filled"
         _hover={{
-          bgColor: "gray.900"
+          bgColor: 'gray.900',
         }}
         size="lg"
         {...rest}
       />
     </FormControl>
-  )
+  );
 }

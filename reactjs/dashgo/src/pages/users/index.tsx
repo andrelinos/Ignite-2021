@@ -1,27 +1,13 @@
 import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Text,
-  Icon,
-  Table,
-  Th,
-  Thead,
-  Tr,
-  Checkbox,
-  Tbody,
-  Td,
-  FormLabel
-} from "@chakra-ui/react";
-import React from "react";
-import { RiAddLine, RiDeleteBack2Fill, RiPencilFill } from "react-icons/ri";
-import { Header } from "../../components/Header";
-import { Pagination } from "../../components/Pagination";
-import { Sidebar } from "../../components/Sidbar";
+  Box, Button, Flex, Heading, Text, Icon, Table, Th, Thead, Tr, Checkbox, Tbody,
+  Td, FormLabel,
+} from '@chakra-ui/react';
+import { RiAddLine, RiDeleteBack2Fill, RiPencilFill } from 'react-icons/ri';
+import { Header } from '../../components/Header';
+import { Pagination } from '../../components/Pagination';
+import { Sidebar } from '../../components/Sidebar';
 
 export default function UserList() {
-
   return (
     <Box>
       <Header />
@@ -39,7 +25,8 @@ export default function UserList() {
               colorScheme="pink"
               leftIcon={<Icon as={RiAddLine} />}
             >
-              Criar novo</Button>
+              Criar novo
+            </Button>
           </Flex>
 
           <Table colorScheme="whiteAlpha">
@@ -54,7 +41,7 @@ export default function UserList() {
               </Tr>
             </Thead>
             <Tbody>
-              <Tr _hover={{ bg: "gray.700" }}>
+              <Tr _hover={{ bg: 'gray.700' }}>
                 <Td px="6">
                   <Checkbox name="chck" id={`chck${0}`} colorScheme="pink" />
                 </Td>
@@ -72,21 +59,21 @@ export default function UserList() {
                     <Button
                       as="a"
                       leftIcon={<Icon color="blue.300" as={RiPencilFill} />}
-                      _hover={{ svg: { color: "blue.500" } }}
+                      _hover={{ svg: { color: 'blue.500' } }}
                       cursor="pointer"
                       variant="link"
-                    ></Button>
+                    />
                     <Button
                       as="a"
                       leftIcon={<Icon color="red.300" as={RiDeleteBack2Fill} />}
-                      _hover={{ svg: { color: "red.500" } }}
+                      _hover={{ svg: { color: 'red.500' } }}
                       cursor="pointer"
                       variant="link"
-                    ></Button>
+                    />
                   </Flex>
                 </Td>
               </Tr>
-              <Tr _hover={{ bg: "gray.700" }}>
+              <Tr _hover={{ bg: 'gray.700' }}>
                 <Td px="6">
                   <Checkbox name="chck" id={`chck${1}`} colorScheme="pink" />
                 </Td>
@@ -104,21 +91,21 @@ export default function UserList() {
                     <Button
                       as="a"
                       leftIcon={<Icon color="blue.300" as={RiPencilFill} />}
-                      _hover={{ svg: { color: "blue.500" } }}
+                      _hover={{ svg: { color: 'blue.500' } }}
                       cursor="pointer"
                       variant="link"
-                    ></Button>
+                    />
                     <Button
                       as="a"
                       leftIcon={<Icon color="red.300" as={RiDeleteBack2Fill} />}
-                      _hover={{ svg: { color: "red.500" } }}
+                      _hover={{ svg: { color: 'red.500' } }}
                       cursor="pointer"
                       variant="link"
-                    ></Button>
+                    />
                   </Flex>
                 </Td>
               </Tr>
-              <Tr _hover={{ bg: "gray.700" }}>
+              <Tr _hover={{ bg: 'gray.700' }}>
                 <Td px="6">
                   <Checkbox name="chck" id={`chck${2}`} colorScheme="pink" />
                 </Td>
@@ -136,17 +123,17 @@ export default function UserList() {
                     <Button
                       as="a"
                       leftIcon={<Icon color="blue.300" as={RiPencilFill} />}
-                      _hover={{ svg: { color: "blue.500" } }}
+                      _hover={{ svg: { color: 'blue.500' } }}
                       cursor="pointer"
                       variant="link"
-                    ></Button>
+                    />
                     <Button
                       as="a"
                       leftIcon={<Icon color="red.300" as={RiDeleteBack2Fill} />}
-                      _hover={{ svg: { color: "red.500" } }}
+                      _hover={{ svg: { color: 'red.500' } }}
                       cursor="pointer"
                       variant="link"
-                    ></Button>
+                    />
                   </Flex>
                 </Td>
               </Tr>
@@ -157,5 +144,5 @@ export default function UserList() {
         </Box>
       </Flex>
     </Box>
-  )
+  );
 }

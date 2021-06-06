@@ -125,14 +125,14 @@ export default function UserList() {
                       leftIcon={<Icon color="blue.300" as={RiPencilFill} />}
                       _hover={{ svg: { color: 'blue.500' } }}
                       cursor="pointer"
-                      variant="link"
+                      variant="unstyled"
                     />
                     <Button
                       as="a"
                       leftIcon={<Icon color="red.300" as={RiDeleteBack2Fill} />}
                       _hover={{ svg: { color: 'red.500' } }}
                       cursor="pointer"
-                      variant="link"
+                      variant="unstyled"
                     />
                   </Flex>
                 </Td>

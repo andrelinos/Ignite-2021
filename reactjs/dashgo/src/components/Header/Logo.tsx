@@ -6,7 +6,7 @@ export function Logo() {
     <Link href="/">
       <Text
         w="64"
-        fontSize="xx-large"
+        fontSize={['2xl', '3xl', '4xl']}
         fontWeight="bold"
         letterSpacing="tight"
         cursor="pointer"

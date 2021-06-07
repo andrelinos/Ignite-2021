@@ -1,6 +1,6 @@
 import {
   Box, Button, Flex, Heading, Text, Icon, Table, Th, Thead, Tr, Checkbox, Tbody,
-  Td, FormLabel,
+  Td, FormLabel, useBreakpointValue,
 } from '@chakra-ui/react';
 import { RiAddLine, RiDeleteBack2Fill, RiPencilFill } from 'react-icons/ri';
 import { Header } from '../../components/Header';
@@ -8,6 +8,11 @@ import { Pagination } from '../../components/Pagination';
 import { Sidebar } from '../../components/Sidebar';
 
 export default function UserList() {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
   return (
     <Box>
       <Header />
@@ -28,21 +33,20 @@ export default function UserList() {
               Criar novo
             </Button>
           </Flex>
-
           <Table colorScheme="whiteAlpha">
             <Thead>
               <Tr>
-                <Th px="6" color="green.300" width="8">
+                <Th px={['2', '4', '6']} color="green.300" width="8">
                   <Checkbox colorScheme="pink" />
                 </Th>
                 <Th>Usuário</Th>
-                <Th>Data de cadastro</Th>
+                {isWideVersion ?? <Th>Data de cadastro</Th>}
                 <Th w="8">Opções</Th>
               </Tr>
             </Thead>
             <Tbody>
               <Tr _hover={{ bg: 'gray.700' }}>
-                <Td px="6">
+                <Td px={['2', '4', '6']}>
                   <Checkbox name="chck" id={`chck${0}`} colorScheme="pink" />
                 </Td>
                 <Td>
@@ -53,7 +57,7 @@ export default function UserList() {
                     </Box>
                   </FormLabel>
                 </Td>
-                <Td>06 de Junho, 2021</Td>
+                {isWideVersion ?? <Td>06 de Junho, 2021</Td>}
                 <Td>
                   <Flex w="100%" justifyContent="space-between">
                     <Button
@@ -74,7 +78,7 @@ export default function UserList() {
                 </Td>
               </Tr>
               <Tr _hover={{ bg: 'gray.700' }}>
-                <Td px="6">
+                <Td px={['2', '4', '6']}>
                   <Checkbox name="chck" id={`chck${1}`} colorScheme="pink" />
                 </Td>
                 <Td>
@@ -85,7 +89,7 @@ export default function UserList() {
                     </Box>
                   </FormLabel>
                 </Td>
-                <Td>06 de Junho, 2021</Td>
+                {isWideVersion ?? <Td>06 de Junho, 2021</Td>}
                 <Td>
                   <Flex w="100%" justifyContent="space-between">
                     <Button
@@ -103,10 +107,11 @@ export default function UserList() {
                       variant="link"
                     />
                   </Flex>
+
                 </Td>
               </Tr>
               <Tr _hover={{ bg: 'gray.700' }}>
-                <Td px="6">
+                <Td px={['2', '4', '6']}>
                   <Checkbox name="chck" id={`chck${2}`} colorScheme="pink" />
                 </Td>
                 <Td>
@@ -117,7 +122,7 @@ export default function UserList() {
                     </Box>
                   </FormLabel>
                 </Td>
-                <Td>06 de Junho, 2021</Td>
+                {isWideVersion ?? <Td>06 de Junho, 2021</Td>}
                 <Td>
                   <Flex w="100%" justifyContent="space-between">
                     <Button
@@ -139,7 +144,6 @@ export default function UserList() {
               </Tr>
             </Tbody>
           </Table>
-
           <Pagination />
         </Box>
       </Flex>

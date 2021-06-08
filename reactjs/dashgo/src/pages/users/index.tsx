@@ -59,89 +59,29 @@ export default function UserList() {
                 </Td>
                 {isWideVersion ?? <Td>06 de Junho, 2021</Td>}
                 <Td>
-                  <Flex w="100%" justifyContent="space-between">
+                  <Box flexDir="column" w="100%" justifyContent="space-between" align="center">
                     <Button
                       as="a"
                       leftIcon={<Icon color="blue.300" as={RiPencilFill} />}
                       _hover={{ svg: { color: 'blue.500' } }}
                       cursor="pointer"
-                      variant="link"
+                      variant="unstyled"
+                      p="0"
+                      w="0"
                     />
                     <Button
                       as="a"
                       leftIcon={<Icon color="red.300" as={RiDeleteBack2Fill} />}
                       _hover={{ svg: { color: 'red.500' } }}
                       cursor="pointer"
-                      variant="link"
+                      variant="unstyled"
+                      p="0"
+                      w="0"
                     />
-                  </Flex>
+                  </Box>
                 </Td>
               </Tr>
-              <Tr _hover={{ bg: 'gray.700' }}>
-                <Td px={['2', '4', '6']}>
-                  <Checkbox name="chck" id={`chck${1}`} colorScheme="pink" />
-                </Td>
-                <Td>
-                  <FormLabel w="100%" htmlFor={`chck${1}`}>
-                    <Box>
-                      <Text fontWeight="bold">Andrelino Silva</Text>
-                      <Text fontSize="sm" color="gray.500">andrelinodev@gmail.com</Text>
-                    </Box>
-                  </FormLabel>
-                </Td>
-                {isWideVersion ?? <Td>06 de Junho, 2021</Td>}
-                <Td>
-                  <Flex w="100%" justifyContent="space-between">
-                    <Button
-                      as="a"
-                      leftIcon={<Icon color="blue.300" as={RiPencilFill} />}
-                      _hover={{ svg: { color: 'blue.500' } }}
-                      cursor="pointer"
-                      variant="link"
-                    />
-                    <Button
-                      as="a"
-                      leftIcon={<Icon color="red.300" as={RiDeleteBack2Fill} />}
-                      _hover={{ svg: { color: 'red.500' } }}
-                      cursor="pointer"
-                      variant="link"
-                    />
-                  </Flex>
 
-                </Td>
-              </Tr>
-              <Tr _hover={{ bg: 'gray.700' }}>
-                <Td px={['2', '4', '6']}>
-                  <Checkbox name="chck" id={`chck${2}`} colorScheme="pink" />
-                </Td>
-                <Td>
-                  <FormLabel w="100%" htmlFor={`chck${2}`}>
-                    <Box>
-                      <Text fontWeight="bold">Andrelino Silva</Text>
-                      <Text fontSize="sm" color="gray.500">andrelinodev@gmail.com</Text>
-                    </Box>
-                  </FormLabel>
-                </Td>
-                {isWideVersion ?? <Td>06 de Junho, 2021</Td>}
-                <Td>
-                  <Flex w="100%" justifyContent="space-between">
-                    <Button
-                      as="a"
-                      leftIcon={<Icon color="blue.300" as={RiPencilFill} />}
-                      _hover={{ svg: { color: 'blue.500' } }}
-                      cursor="pointer"
-                      variant="unstyled"
-                    />
-                    <Button
-                      as="a"
-                      leftIcon={<Icon color="red.300" as={RiDeleteBack2Fill} />}
-                      _hover={{ svg: { color: 'red.500' } }}
-                      cursor="pointer"
-                      variant="unstyled"
-                    />
-                  </Flex>
-                </Td>
-              </Tr>
             </Tbody>
           </Table>
           <Pagination />

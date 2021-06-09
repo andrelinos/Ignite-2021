@@ -2,6 +2,7 @@ import {
   Box, Button, Flex, Heading, Text, Icon, Table, Th, Thead, Tr, Checkbox, Tbody,
   Td, FormLabel, useBreakpointValue,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import { RiAddLine, RiDeleteBack2Fill, RiPencilFill } from 'react-icons/ri';
 import { Header } from '../../components/Header';
 import { Pagination } from '../../components/Pagination';
@@ -24,14 +25,17 @@ export default function UserList() {
           <Flex mb="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">Usuários</Heading>
 
-            <Button
-              as="a"
-              fontSize="sm"
-              colorScheme="pink"
-              leftIcon={<Icon as={RiAddLine} />}
-            >
-              Criar novo
-            </Button>
+            <Link href="/users/create" passHref>
+              <Button
+                as="a"
+                fontSize="sm"
+                colorScheme="pink"
+                leftIcon={<Icon as={RiAddLine} />}
+              >
+                Criar novo
+              </Button>
+            </Link>
+
           </Flex>
           <Table colorScheme="whiteAlpha">
             <Thead>

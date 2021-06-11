@@ -2,16 +2,20 @@ import {
   Flex, Stack, Button, Text,
 } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 
 import { Input } from '../components/Form/Input';
 
 type SignInFormData = {
   email: string;
   password: string;
+
 }
 
 export default function SignIn() {
-  const { register, handleSubmit, formState } = useForm();
+  const {
+    register, handleSubmit, formState: { errors }, formState,
+  } = useForm<SignInFormData>();
 
   const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -57,14 +61,18 @@ export default function SignIn() {
             name="email"
             type="email"
             label="E-mail"
-            {...register('email')}
+            error={errors.email}
+            {...register('email', { required: 'E-mail obrigatório' })}
           />
+          <ErrorMessage errors={errors} name="email" />
           <Input
             name="password"
             type="password"
             label="Password"
-            {...register('password')}
+            error={errors.password}
+            {...register('password', { required: 'Senha obrigatória' })}
           />
+          <ErrorMessage errors={errors} name="password" />
         </Stack>
 
         <Button

@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^1.6.3",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@hookform/error-message": "^2.0.0",
     "apexcharts": "^3.26.3",
     "framer-motion": "^4.1.17",
     "next": "10.2.3",

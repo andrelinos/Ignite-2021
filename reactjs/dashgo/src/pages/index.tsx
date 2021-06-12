@@ -1,21 +1,30 @@
 import {
-  Flex, Stack, Button, Text,
+  Flex, Stack, Button, Text, Box,
 } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+// import * as yup from 'yup';
+// import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Input } from '../components/Form/Input';
 
 type SignInFormData = {
   email: string;
   password: string;
-
 }
+
+// const signInFormSchema = yup.object().shape({
+//   email: yup.string().required('E-mail obrigatório...').email('E-mail inválido'),
+//   password: yup.string().required('Senha obrigatória...'),
+
+// });
 
 export default function SignIn() {
   const {
     register, handleSubmit, formState: { errors }, formState,
-  } = useForm<SignInFormData>();
+  } = useForm<SignInFormData>({
+    // resolver: yupResolver(signInFormSchema),
+  });
 
   const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -56,23 +65,27 @@ export default function SignIn() {
         flexDir="column"
         onSubmit={handleSubmit(handleSignIn)}
       >
-        <Stack spacing="4">
+        <Stack spacing="4" position="relative">
           <Input
             name="email"
             type="email"
             label="E-mail"
             error={errors.email}
-            {...register('email', { required: 'E-mail obrigatório' })}
+            {...register('email', { required: 'E-mail obrigatório...' })}
           />
-          <ErrorMessage errors={errors} name="email" />
+          <Box position="absolute" right="3" top="7" color="red.300">
+            <ErrorMessage errors={errors} name="email" />
+          </Box>
           <Input
             name="password"
             type="password"
             label="Password"
             error={errors.password}
-            {...register('password', { required: 'Senha obrigatória' })}
+            {...register('password', { required: 'Senha obrigatória...' })}
           />
-          <ErrorMessage errors={errors} name="password" />
+          <Box position="absolute" right="3" top="123" color="red.300">
+            <ErrorMessage errors={errors} name="password" />
+          </Box>
         </Stack>
 
         <Button

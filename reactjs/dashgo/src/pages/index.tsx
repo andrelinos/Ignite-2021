@@ -65,7 +65,7 @@ export default function SignIn() {
         flexDir="column"
         onSubmit={handleSubmit(handleSignIn)}
       >
-        <Stack spacing="4" position="relative">
+        <Stack spacing="4" pos="relative">
           <Input
             name="email"
             type="email"
@@ -73,7 +73,7 @@ export default function SignIn() {
             error={errors.email}
             {...register('email', { required: 'E-mail obrigatório...' })}
           />
-          <Box position="absolute" right="3" top="7" color="red.300">
+          <Box pos="absolute" right="3" top="7" color="red.300">
             <ErrorMessage errors={errors} name="email" />
           </Box>
           <Input
@@ -81,9 +81,11 @@ export default function SignIn() {
             type="password"
             label="Password"
             error={errors.password}
-            {...register('password', { required: 'Senha obrigatória...' })}
+            {...register('password', {
+              required: 'Senha obrigatória...',
+            })}
           />
-          <Box position="absolute" right="3" top="123" color="red.300">
+          <Box pos="absolute" right="3" top="123" color="red.300">
             <ErrorMessage errors={errors} name="password" />
           </Box>
         </Stack>

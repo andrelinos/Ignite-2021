@@ -1,11 +1,15 @@
+import { useRef } from 'react';
 import {
   Flex, Input, Icon,
 } from '@chakra-ui/react';
-import { useRef } from 'react';
 import { RiSearchLine } from 'react-icons/ri';
 
 export function SearchBox() {
+  // const [search, setSearch] = useState(');
+
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // searchInputRef.current.focus();
 
   return (
     <Flex

@@ -1,0 +1,34 @@
+body {
+  overflow-y: scroll;
+  overflow-y: overlay;
+  scrollbar-color: #FFBA08 transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+  border: 1px transparent;
+}
+
+body::-webkit-scrollbar-thumb:vertical {
+  height: 30px!important;
+  background-color: #FFBA08;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #FFBA09;
+}
+
+body::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
+

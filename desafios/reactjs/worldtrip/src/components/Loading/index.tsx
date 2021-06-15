@@ -1,7 +1,6 @@
-import { Flex, Spinner } from "@chakra-ui/react";
+import { Flex, Spinner } from '@chakra-ui/react';
 
 export default function Loading() {
-
   return (
     <Flex
       align="center"
@@ -16,5 +15,5 @@ export default function Loading() {
     >
       <Spinner size="xl" color="yellow.400" />
     </Flex>
-  )
+  );
 }

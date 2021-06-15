@@ -1,18 +1,30 @@
-import { Grid, Text } from "@chakra-ui/react";
-import { ContinentProps } from "../../pages/continent/[slug]";
-import Infos from "./Info";
+import { Grid, Text, Image } from '@chakra-ui/react';
 
-export default function Content({continent}:ContinentProps) {
+import Infos from './Info';
+
+interface ContinentProps {
+  continent: {
+    banner: string;
+    description: string;
+  }
+}
+
+export default function Content({ continent }:ContinentProps) {
   return (
-    <Grid templateColumns={["1fr","1fr","1fr 1fr", "1.2fr 1fr"]} gap={[5, 10, 16, 20]} my={["8", "20"]}>
+    <Grid
+      templateColumns={['1fr', '1fr', '1fr 1fr', '1.2fr 1fr']}
+      gap={[5, 10, 16, 20]}
+      my={['8', '20']}
+    >
       <Text
-        fontSize={["lg", "xl", "xl", "2xl"]}
+        fontSize={['lg', 'xl', 'xl', '2xl']}
         color="gray.700"
         textAlign="justify"
       >
-      {continent.description}
+        <Image src={continent.banner} />
+        {continent.description}
       </Text>
-      <Infos continent={continent}/>
+      <Infos continent={continent} />
     </Grid>
-  )
+  );
 }

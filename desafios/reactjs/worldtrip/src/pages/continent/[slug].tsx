@@ -1,18 +1,18 @@
 import { Flex } from '@chakra-ui/react';
-import { GetStaticPaths, GetStaticProps } from "next";
-import Head from "next/head";
+import { useRouter } from 'next/router';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
+import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-dom';
 
-import Cities from "../../components/Cities";
-import Content from "../../components/Content";
-import ContinentBanner from "../../components/ContinentBanner";
-import { Header } from "../../components/Header";
-import { getPrismicClient } from "../../services/prismic";
-import Prismic from '@prismicio/client';
-import { useRouter } from "next/dist/client/router";
-import Loading from "../../components/Loading";
+import Cities from '../../components/Cities';
+import Content from '../../components/Content';
+import ContinentBanner from '../../components/ContinentBanner';
+import { Header } from '../../components/Header';
+import { getPrismicClient } from '../../services/prismic';
+import Loading from '../../components/Loading';
 
-export interface ContinentProps {
+interface ContinentProps {
   continent: {
     slug: string;
     title: string;
@@ -31,16 +31,17 @@ export interface ContinentProps {
   }
 }
 
-export default function Continent({continent}: ContinentProps) {
+export default function Continent({ continent }: ContinentProps) {
   const router = useRouter();
   if (router.isFallback) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
     <Flex direction="column">
       <Head>
         <title>WorldTrip - {continent.title}</title>
+
         <meta property="og:title" content={`WorldTrip ${continent.title}`} />
         <meta property="og:description" content={continent.description} />
         <meta name="twitter:title" content={`WorldTrip ${continent.title}`} />
@@ -60,7 +61,7 @@ export default function Continent({continent}: ContinentProps) {
         <Cities continent={continent} />
       </Flex>
     </Flex>
-  )
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -69,13 +70,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
     Prismic.Predicates.at('document.type', 'continent'),
   ]);
 
-  const paths = continents.results.map(continent => {
-    return {
-      params: {
-        slug: continent.uid,
-      },
-    };
-  });
+  const paths = continents.results.map((continent) => ({
+    params: {
+      slug: continent.uid,
+    },
+  }));
 
   return {
     paths,
@@ -89,28 +88,26 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const response = await prismic.getByUID('continent', String(slug), {});
 
   const continent = {
-    slug:response.uid,
+    slug: response.uid,
     title: response.data.title,
     description: RichText.asText(response.data.description),
-    banner: response.data.banner,
+    banner: response.data.banner.url,
     countries: response.data.countries,
     languages: response.data.languages,
     cities: response.data.cities,
     cities_list: response.data.cities_list,
-    cities100: response.data.cities100.map(city => {
-      return {
-        city: city.city,
-        country: city.country,
-        thumbnail: city.thumbnail,
-        flag:city.flag,
-      }
-    })
+    cities100: response.data.cities100.map((city) => ({
+      city: city.city,
+      country: city.country,
+      thumbnail: city.thumbnail.url,
+      flag: city.flag.url,
+    })),
   };
 
   return {
     props: {
-      continent
+      continent,
     },
     revalidate: 1800,
-  }
-}
+  };
+};

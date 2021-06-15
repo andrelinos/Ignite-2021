@@ -1,9 +1,17 @@
 import {
   Flex, Heading, Icon, Popover, PopoverArrow, PopoverBody, PopoverCloseButton,
-  PopoverContent, PopoverHeader, PopoverTrigger, Text, Tooltip
-} from "@chakra-ui/react";
-import { RiInformationLine } from "react-icons/ri";
-import { ContinentProps } from "../../pages/continent/[slug]";
+  PopoverContent, PopoverHeader, PopoverTrigger, Text, Tooltip,
+} from '@chakra-ui/react';
+import { RiInformationLine } from 'react-icons/ri';
+
+interface ContinentProps {
+  continent: {
+   countries: number;
+   languages: number;
+   cities: number;
+   cities_list: string;
+  }
+}
 
 export default function Infos({ continent }: ContinentProps) {
   return (
@@ -11,13 +19,13 @@ export default function Infos({ continent }: ContinentProps) {
       <Flex
         direction="column"
         justify="center"
-        align={["flex-start", "flex-start",
-          "center"]}
+        align={['flex-start', 'flex-start',
+          'center']}
       >
-        <Heading fontSize={["2xl", "5xl"]} color="yellow.400" fontWeight="500">
+        <Heading fontSize={['2xl', '5xl']} color="yellow.400" fontWeight="500">
           {continent.countries}
         </Heading>
-        <Text fontWeight="500" fontSize={["md", "xl"]} color="gray.700">
+        <Text fontWeight="500" fontSize={['md', 'xl']} color="gray.700">
           países
         </Text>
       </Flex>
@@ -25,13 +33,13 @@ export default function Infos({ continent }: ContinentProps) {
       <Flex
         direction="column"
         justify="center"
-        align={["flex-start", "flex-start",
-          "center"]}
+        align={['flex-start', 'flex-start',
+          'center']}
       >
-        <Heading fontSize={["2xl", "5xl"]} color="yellow.400" fontWeight="500">
+        <Heading fontSize={['2xl', '5xl']} color="yellow.400" fontWeight="500">
           {continent.languages}
         </Heading>
-        <Text fontWeight="500" fontSize={["md", "xl"]} color="gray.700">
+        <Text fontWeight="500" fontSize={['md', 'xl']} color="gray.700">
           línguas
         </Text>
       </Flex>
@@ -39,16 +47,17 @@ export default function Infos({ continent }: ContinentProps) {
       <Flex
         direction="column"
         justify="center"
-        align={["flex-start", "flex-start",
-          "center"]}
+        align={['flex-start', 'flex-start',
+          'center']}
       >
-        <Heading fontSize={["2xl", "5xl"]} color="yellow.400" fontWeight="500">
+        <Heading fontSize={['2xl', '5xl']} color="yellow.400" fontWeight="500">
           {continent.cities}
         </Heading>
-        <Text fontWeight="500" fontSize={["md", "xl"]} color="gray.700">
+        <Text fontWeight="500" fontSize={['md', 'xl']} color="gray.700">
           cidades +100
 
           <Popover>
+
             <PopoverTrigger>
               <span>
                 <Icon
@@ -56,11 +65,12 @@ export default function Infos({ continent }: ContinentProps) {
                   as={RiInformationLine}
                   ml="1"
                   color="gray.400"
-                  w={["10px", "16px"]}
-                  h={["10px", "16px"]}
+                  w={['10px', '16px']}
+                  h={['10px', '16px']}
                 />
               </span>
             </PopoverTrigger>
+
             <PopoverContent bg="gray.700" color="yellow.400">
               <PopoverArrow bg="gray.700" />
               <PopoverCloseButton />
@@ -68,11 +78,12 @@ export default function Infos({ continent }: ContinentProps) {
                 {continent.cities_list}
               </PopoverBody>
             </PopoverContent>
+
           </Popover>
 
         </Text>
       </Flex>
 
     </Flex>
-  )
+  );
 }

@@ -6,7 +6,7 @@ import Prismic from '@prismicio/client';
 import { Header } from '../components/Header';
 import TravelTypes from '../components/TravelTypes';
 import { Slider } from '../components/Slider';
-import { getPrismicClient } from "../services/prismic";
+import { getPrismicClient } from '../services/prismic';
 
 interface HomeProps {
   continents: {
@@ -14,6 +14,7 @@ interface HomeProps {
     title: string;
     summary: string;
     banner: string;
+    slider_image: string;
   }[],
 }
 
@@ -36,20 +37,19 @@ export default function Home({ continents }: HomeProps) {
         align="center"
         flexDir="column"
 
-
       >
 
         <Header />
 
         <TravelTypes />
 
-        <Divider w={["60px", "90px"]} mt="16" p="2px" bg="gray.400" orientation="horizontal" />
+        <Divider w={['60px', '90px']} mt="16" p="2px" bg="gray.400" orientation="horizontal" />
 
         <Heading
           textAlign="center"
           fontWeight="500"
-          my={["5", "14"]}
-          fontSize={["lg", "3xl", "4xl"]}
+          my={['5', '14']}
+          fontSize={['lg', '3xl', '4xl']}
         >
           Vamos nessa?<br />Então escolha seu continente
         </Heading>
@@ -60,31 +60,26 @@ export default function Home({ continents }: HomeProps) {
 
       </Flex>
     </>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient();
 
   const response = await prismic.query(
-    [Prismic.Predicates.at('document.type', 'continent')]
-  )
+    [Prismic.Predicates.at('document.type', 'continent')],
+  );
 
-
-
-  const continents = response.results.map(continent => {
-    return {
-      slug: continent.uid,
-      title: continent.data.title,
-      summary: continent.data.summary,
-      banner: continent.data.banner,
-    }
-  })
+  const continents = response.results.map((continent) => ({
+    slug: continent.uid,
+    title: continent.data.title,
+    summary: continent.data.summary,
+    slider_image: continent.data.slider_image.url,
+  }));
 
   return {
     props: {
-      continents
-    }
-  }
-}
-
+      continents,
+    },
+  };
+};

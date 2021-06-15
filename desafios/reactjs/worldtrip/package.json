@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@types/node": "^15.6.2",
+    "@types/prismic-dom": "^2.1.1",
     "@types/react": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",

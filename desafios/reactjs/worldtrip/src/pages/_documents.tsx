@@ -1,4 +1,3 @@
-
 import Document, {
   Html, Head, Main, NextScript,
 } from 'next/document';
@@ -12,7 +11,7 @@ export default class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?poppins=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
 
           <link rel="shortcut icon" href="favicon.png" type="image/png" />
-          <link rel="apple-touch-icon" href="favicon.png"></link>
+          <link rel="apple-touch-icon" href="favicon.png" />
 
           <meta property="og:locale" content="pt_BR" />
           <meta property="og:type" content="website" />

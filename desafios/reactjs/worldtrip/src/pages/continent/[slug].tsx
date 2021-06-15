@@ -5,11 +5,11 @@ import Head from 'next/head';
 import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-dom';
 
+import { getPrismicClient } from '../../services/prismic';
 import Cities from '../../components/Cities';
 import Content from '../../components/Content';
 import ContinentBanner from '../../components/ContinentBanner';
 import { Header } from '../../components/Header';
-import { getPrismicClient } from '../../services/prismic';
 import Loading from '../../components/Loading';
 
 interface ContinentProps {

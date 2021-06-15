@@ -40,9 +40,9 @@ export function Slider({ continents }: SliderProps) {
               align="center"
               justify="center"
               direction="column"
-              bg="gray.200"
+              bg="gray.500"
               bgImage={`url("${continent.slider_image}")`}
-              bgPosition="100% 30%"
+              bgPosition={['100% 10%', '100% 20%']}
               bgRepeat="no-repeat"
               bgSize="cover"
               textAlign="center"

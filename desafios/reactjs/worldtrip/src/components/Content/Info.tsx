@@ -1,6 +1,6 @@
 import {
   Flex, Heading, Icon, Popover, PopoverArrow, PopoverBody, PopoverCloseButton,
-  PopoverContent, PopoverHeader, PopoverTrigger, Text, Tooltip,
+  PopoverContent, PopoverHeader, PopoverTrigger, Box, Text, Tooltip,
 } from '@chakra-ui/react';
 import { RiInformationLine } from 'react-icons/ri';
 
@@ -19,8 +19,7 @@ export default function Infos({ continent }: ContinentProps) {
       <Flex
         direction="column"
         justify="center"
-        align={['flex-start', 'flex-start',
-          'center']}
+        align={['flex-start', 'flex-start', 'center']}
       >
         <Heading fontSize={['2xl', '5xl']} color="yellow.400" fontWeight="500">
           {continent.countries}
@@ -53,13 +52,15 @@ export default function Infos({ continent }: ContinentProps) {
         <Heading fontSize={['2xl', '5xl']} color="yellow.400" fontWeight="500">
           {continent.cities}
         </Heading>
-        <Text fontWeight="500" fontSize={['md', 'xl']} color="gray.700">
-          cidades +100
+        <Flex fontWeight="500" fontSize={['md', 'xl']} color="gray.700">
+          <Text pos="relative">
+            cidades +100
+          </Text>
 
           <Popover>
 
             <PopoverTrigger>
-              <span>
+              <Box>
                 <Icon
                   cursor="pointer"
                   as={RiInformationLine}
@@ -68,7 +69,7 @@ export default function Infos({ continent }: ContinentProps) {
                   w={['10px', '16px']}
                   h={['10px', '16px']}
                 />
-              </span>
+              </Box>
             </PopoverTrigger>
 
             <PopoverContent bg="gray.700" color="yellow.400">
@@ -81,7 +82,7 @@ export default function Infos({ continent }: ContinentProps) {
 
           </Popover>
 
-        </Text>
+        </Flex>
       </Flex>
 
     </Flex>

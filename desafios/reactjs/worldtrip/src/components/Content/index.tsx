@@ -4,6 +4,10 @@ import Infos from './Info';
 
 interface ContinentProps {
   continent: {
+    countries: number;
+    languages: number;
+    cities: number;
+    cities_list: string;
     banner: string;
     description: string;
   }
@@ -21,7 +25,8 @@ export default function Content({ continent }:ContinentProps) {
         color="gray.700"
         textAlign="justify"
       >
-        <Image src={continent.banner} />
+        <Image mb="2rem" src={continent.banner} />
+
         {continent.description}
       </Text>
       <Infos continent={continent} />

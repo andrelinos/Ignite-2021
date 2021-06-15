@@ -55,7 +55,6 @@ export default function Continent({ continent }: ContinentProps) {
       <Header />
 
       <ContinentBanner continent={continent} />
-
       <Flex direction="column" maxW="1160px" mx="auto" mb="10" px="1rem">
         <Content continent={continent} />
         <Cities continent={continent} />

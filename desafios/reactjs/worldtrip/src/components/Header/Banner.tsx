@@ -6,9 +6,10 @@ export function Banner() {
   return (
     <Flex
       minW="100%"
-      bgImage="url('/images/banner.svg')"
+      bgImage="url('/images/banner_home.jpg')"
       bgRepeat="no-repeat"
       bgSize="cover"
+      bgPosition={['100% 20%', '100% 20%', '100% 30%']}
     >
       <Flex
         w="100%"

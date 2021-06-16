@@ -31,6 +31,8 @@ interface ContinentProps {
   }
 }
 
+// { city: any; country: any; thumbnail: { url: any; }; flag: { url: any; }; }
+
 export default function Continent({ continent }: ContinentProps) {
   const router = useRouter();
   if (router.isFallback) {

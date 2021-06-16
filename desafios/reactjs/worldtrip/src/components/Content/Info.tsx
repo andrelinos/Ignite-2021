@@ -53,10 +53,15 @@ export default function Infos({ continent }: ContinentProps) {
           {continent.cities}
         </Heading>
         <Flex fontWeight="500" fontSize={['md', 'xl']} color="gray.700">
-          <Text pos="relative">
+          <Text
+            fontWeight="500"
+            fontSize={['md',
+              'xl']}
+            color="gray.700"
+            pos="relative"
+          >
             cidades +100
           </Text>
-
           <Popover>
 
             <PopoverTrigger>
@@ -72,7 +77,13 @@ export default function Infos({ continent }: ContinentProps) {
               </Box>
             </PopoverTrigger>
 
-            <PopoverContent bg="gray.700" color="yellow.400">
+            <PopoverContent
+              bg="gray.700"
+              color="yellow.400"
+              pos="absolute"
+              top="0"
+              right="0"
+            >
               <PopoverArrow bg="gray.700" />
               <PopoverCloseButton />
               <PopoverBody fontWeight="400" fontSize="lg">
@@ -81,7 +92,6 @@ export default function Infos({ continent }: ContinentProps) {
             </PopoverContent>
 
           </Popover>
-
         </Flex>
       </Flex>
 

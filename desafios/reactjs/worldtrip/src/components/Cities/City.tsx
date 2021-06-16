@@ -13,7 +13,7 @@ export default function City({
   city, country, flag, thumbnail,
 }: CityProps) {
   return (
-    <Box borderRadius="4px" overflow="hidden" bg="gray.300">
+    <Box m="0 auto" borderRadius="4px" minW="250px" overflow="hidden" bg="gray.300">
       <Image src={thumbnail} alt={`${city}, ${country}`} h="170px" w="100%" />
       <Flex
         p="6"

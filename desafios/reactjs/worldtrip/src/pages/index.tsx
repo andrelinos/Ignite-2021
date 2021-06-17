@@ -68,6 +68,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const response = await prismic.query(
     [Prismic.Predicates.at('document.type', 'continent')],
+    { pageSize: 20 },
   );
 
   const continents = response.results.map((continent) => ({

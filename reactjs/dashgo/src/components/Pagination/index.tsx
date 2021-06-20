@@ -1,7 +1,47 @@
-import { Stack, Button, Box } from '@chakra-ui/react';
+import {
+  Stack, Box, Text, Button,
+} from '@chakra-ui/react';
 import { PaginationItem } from './PaginationItem';
 
-export function Pagination() {
+interface PaginationProps {
+  totalCountOfRegisters: number;
+  registersPerPage?: number;
+  currentPage?: number;
+  onPageChange: (page: number) => void;
+}
+
+const siblingsCount = 1;
+
+function generatePageArray(from: number, to: number) {
+  return [...new Array(to - from)]
+    .map((_, index) => from + index + 1)
+    .filter((page) => page > 0);
+}
+
+export function Pagination({
+  totalCountOfRegisters,
+  registersPerPage = 10,
+  currentPage = 1,
+  onPageChange,
+}: PaginationProps) {
+  const lastPage = Math.ceil(totalCountOfRegisters / registersPerPage);
+
+  const previousPages = currentPage > 1
+    ? generatePageArray(currentPage - 1 - siblingsCount, currentPage - 1)
+    : [];
+
+  const nextPages = currentPage < lastPage
+    ? generatePageArray(currentPage, Math.min(currentPage + siblingsCount, lastPage))
+    : [];
+
+  function handlePreviousPages() {
+    // TODO
+  }
+
+  function handleNextPages() {
+    // TODO
+  }
+
   return (
     <Stack
       direction={['column', 'row']}
@@ -15,12 +55,66 @@ export function Pagination() {
       </Box>
       <Stack direction="row" spacing="2">
 
-        <PaginationItem number={1} isCurrent />
-        <PaginationItem number={2} />
-        <PaginationItem number={3} />
-        <PaginationItem number={4} />
-        <PaginationItem number={5} />
-        <PaginationItem number={6} />
+        {currentPage > (1 + siblingsCount) && (
+          <>
+            <PaginationItem number={1} />
+            {currentPage > (2 + siblingsCount)
+            && (
+            <Button
+              w="4"
+              size="sm"
+              fontSize="xs"
+              bg="gray.700"
+              _hover={{
+                bg: 'gray.700',
+                cursor: 'default',
+              }}
+              onClick={handlePreviousPages}
+            >
+              ...
+            </Button>
+            )}
+          </>
+        )}
+
+        {previousPages.length > 0
+          && previousPages.map((page) => (
+            <PaginationItem
+              key={page}
+              number={page}
+            />
+          ))}
+
+        <PaginationItem number={currentPage} isCurrent />
+        {nextPages.length > 0
+          && nextPages.map((page) => (
+            <PaginationItem
+              key={page}
+              number={page}
+            />
+          ))}
+
+        {(currentPage + siblingsCount) < lastPage && (
+          <>
+            {(currentPage + 1 + siblingsCount) < lastPage
+            && (
+              <Button
+                w="4"
+                size="sm"
+                fontSize="xs"
+                bg="gray.700"
+                _hover={{
+                  bg: 'gray.700',
+                  cursor: 'default',
+                }}
+                onClick={handleNextPages}
+              >
+                ...
+              </Button>
+            )}
+            <PaginationItem number={lastPage} />
+          </>
+        )}
 
       </Stack>
 

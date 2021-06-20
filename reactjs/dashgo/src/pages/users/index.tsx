@@ -3,52 +3,28 @@ import {
   Td, FormLabel, useBreakpointValue, Spinner,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { RiAddLine, RiDeleteBack2Fill, RiPencilFill } from 'react-icons/ri';
-import { useQuery } from 'react-query';
+import {
+  RiAddLine, RiDeleteBin2Line, RiPencilFill, RiArrowUpDownFill,
+} from 'react-icons/ri';
 
 import { Header } from '../../components/Header';
 import { Pagination } from '../../components/Pagination';
 import { Sidebar } from '../../components/Sidebar';
-
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  createdAt: string;
-};
+import { useUsers } from '../../services/hooks/useUsers';
 
 export default function UserList() {
-  const { data, isLoading, error } = useQuery('users', async () => {
-    const response = await fetch('http://localhost:3000/api/users');
-    const data = await response.json();
+  const {
+    data, isLoading, isFetching, error, refetch,
+  } = useUsers();
 
-    const users: User[] = data.users.map(((user) => ({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      createdAt: new Date(user.createdAt).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-      }),
-    })));
-
-    return users;
-  }, {
-    staleTime: 1000 * 5,
-  });
+  function handleRefetch() {
+    refetch();
+  }
 
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
-
-  useEffect(() => {
-    fetch('http://localhost:3000/api/users')
-      .then((response) => response.json)
-      .then((data) => console.log(data));
-  }, []);
 
   return (
     <Box>
@@ -59,18 +35,36 @@ export default function UserList() {
 
         <Box flex="1" borderRadius={['0', '0.5rem']} bg="gray.800" p={['4', '8']}>
           <Flex mb="8" justify="space-between" align="center">
-            <Heading size="lg" fontWeight="normal">Usuários</Heading>
+            <Heading size="lg" fontWeight="normal">
+              Usuários
 
-            <Link href="/users/create" passHref>
+              {!isLoading && isFetching && <Spinner size="sm" color="green.500" ml="4" />}
+            </Heading>
+
+            <Flex w="11rem" justify="space-between" flexDir="row" alignItems="center">
               <Button
                 as="a"
-                fontSize="sm"
+                fontSize="0"
                 colorScheme="pink"
-                leftIcon={<Icon as={RiAddLine} />}
-              >
-                Criar novo
-              </Button>
-            </Link>
+                variant="unstyled"
+                leftIcon={<Icon color="green.300" boxSize="8" as={RiArrowUpDownFill} />}
+                _hover={{ svg: { color: 'green.500' } }}
+                cursor={isFetching ? 'not-allowed' : 'pointer'}
+                onClick={handleRefetch}
+                title="Recarregar listagem de usuários"
+              />
+              <Link href="/users/create" passHref>
+                <Button
+                  as="a"
+                  fontSize="sm"
+                  colorScheme="pink"
+                  leftIcon={<Icon as={RiAddLine} />}
+                  title="Criar novo usuário"
+                >
+                  Criar novo
+                </Button>
+              </Link>
+            </Flex>
           </Flex>
 
           { isLoading
@@ -127,7 +121,7 @@ export default function UserList() {
                             />
                             <Button
                               as="a"
-                              leftIcon={<Icon color="red.300" as={RiDeleteBack2Fill} />}
+                              leftIcon={<Icon color="red.300" as={RiDeleteBin2Line} />}
                               _hover={{ svg: { color: 'red.500' } }}
                               cursor="pointer"
                               variant="unstyled"

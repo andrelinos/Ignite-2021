@@ -54,8 +54,6 @@ export default function Home({ continents }: HomeProps) {
           Vamos nessa?<br />Então escolha seu continente
         </Heading>
 
-        {console.log(JSON.stringify(continents))}
-
         <Slider continents={continents} />
 
       </Flex>

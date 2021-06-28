@@ -60,19 +60,17 @@ export function Pagination({
             <PaginationItem number={1} />
             {currentPage > (2 + siblingsCount)
             && (
-            <Button
-              w="4"
-              size="sm"
-              fontSize="xs"
-              bg="gray.700"
-              _hover={{
-                bg: 'gray.700',
-                cursor: 'default',
-              }}
-              onClick={handlePreviousPages}
-            >
-              ...
-            </Button>
+              <Text
+                as="span"
+                color="gray.300"
+                bg="gray.700"
+                w={8}
+                textAlign="center"
+                borderRadius="md"
+                cursor="default"
+              >
+                ...
+              </Text>
             )}
           </>
         )}
@@ -98,19 +96,17 @@ export function Pagination({
           <>
             {(currentPage + 1 + siblingsCount) < lastPage
             && (
-              <Button
-                w="4"
-                size="sm"
-                fontSize="xs"
-                bg="gray.700"
-                _hover={{
-                  bg: 'gray.700',
-                  cursor: 'default',
-                }}
-                onClick={handleNextPages}
-              >
-                ...
-              </Button>
+            <Text
+              as="span"
+              color="gray.300"
+              bg="gray.700"
+              w={8}
+              textAlign="center"
+              borderRadius="md"
+              cursor="default"
+            >
+              ...
+            </Text>
             )}
             <PaginationItem number={lastPage} />
           </>

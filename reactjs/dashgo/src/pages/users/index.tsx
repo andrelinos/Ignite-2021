@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Box, Button, Flex, Heading, Text, Icon, Table, Th, Thead, Tr, Checkbox, Tbody,
   Td, FormLabel, useBreakpointValue, Spinner,
@@ -13,6 +14,7 @@ import { Sidebar } from '../../components/Sidebar';
 import { useUsers } from '../../services/hooks/useUsers';
 
 export default function UserList() {
+  const [page, setPage] = useState(1);
   const {
     data, isLoading, isFetching, error, refetch,
   } = useUsers();
@@ -96,10 +98,10 @@ export default function UserList() {
                         </Td>
                         <Td>
                           <FormLabel w="100%" htmlFor={`chck${user.id}`}>
-                            <Box>
+                            <>
                               <Text fontWeight="bold">{user.name}</Text>
                               <Text fontSize="sm" color="gray.500">{user.email}</Text>
-                            </Box>
+                            </>
                           </FormLabel>
                         </Td>
                         {isWideVersion && <Td>{user.createdAt}</Td>}
@@ -137,8 +139,8 @@ export default function UserList() {
                 </Table>
                 <Pagination
                   totalCountOfRegisters={200}
-                  currentPage={5}
-                  onPageChange={() => {}}
+                  currentPage={page}
+                  onPageChange={setPage}
                 />
               </>
             )}

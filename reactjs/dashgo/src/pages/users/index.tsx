@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import NextLink from 'next/link';
 import {
   Box, Button, Flex, Heading, Text, Icon, Table, Th, Thead, Tr, Checkbox, Tbody,
-  Td, FormLabel, useBreakpointValue, Spinner,
+  Td, FormLabel, useBreakpointValue, Spinner, Link,
 } from '@chakra-ui/react';
-import Link from 'next/link';
 import {
   RiAddLine, RiDeleteBin2Line, RiPencilFill, RiArrowUpDownFill,
 } from 'react-icons/ri';
+
+import { api } from '../../services/api';
+import { queryClient } from '../../services/queryClient';
 
 import { Header } from '../../components/Header';
 import { Pagination } from '../../components/Pagination';
@@ -17,7 +20,7 @@ export default function UserList() {
   const [page, setPage] = useState(1);
   const {
     data, isLoading, isFetching, error, refetch,
-  } = useUsers();
+  } = useUsers(page);
 
   function handleRefetch() {
     refetch();
@@ -27,6 +30,14 @@ export default function UserList() {
     base: false,
     lg: true,
   });
+
+  async function handlePrefetchUser(userId: number) {
+    await queryClient.prefetchQuery(['user', userId], async () => {
+      const response = await api.get(`users/${userId}`);
+
+      return response.data;
+    });
+  }
 
   return (
     <Box>
@@ -55,7 +66,7 @@ export default function UserList() {
                 onClick={handleRefetch}
                 title="Recarregar listagem de usuários"
               />
-              <Link href="/users/create" passHref>
+              <NextLink href="/users/create" passHref>
                 <Button
                   as="a"
                   fontSize="sm"
@@ -65,7 +76,7 @@ export default function UserList() {
                 >
                   Criar novo
                 </Button>
-              </Link>
+              </NextLink>
             </Flex>
           </Flex>
 
@@ -91,7 +102,7 @@ export default function UserList() {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {data.map((user) => (
+                    {data.users.map((user: any) => (
                       <Tr key={user.id} _hover={{ bg: 'gray.700' }}>
                         <Td px={['2', '4', '6']}>
                           <Checkbox name="chck" id={`chck${user.id}`} colorScheme="pink" />
@@ -99,7 +110,12 @@ export default function UserList() {
                         <Td>
                           <FormLabel w="100%" htmlFor={`chck${user.id}`}>
                             <>
-                              <Text fontWeight="bold">{user.name}</Text>
+                              <Link
+                                color="purple.400"
+                                onMouseEnter={() => handlePrefetchUser(user.id)}
+                              >
+                                <Text fontWeight="bold">{user.name}</Text>
+                              </Link>
                               <Text fontSize="sm" color="gray.500">{user.email}</Text>
                             </>
                           </FormLabel>
@@ -138,7 +154,7 @@ export default function UserList() {
                   </Tbody>
                 </Table>
                 <Pagination
-                  totalCountOfRegisters={200}
+                  totalCountOfRegisters={data.totalCount}
                   currentPage={page}
                   onPageChange={setPage}
                 />

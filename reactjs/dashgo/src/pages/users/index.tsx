@@ -31,7 +31,7 @@ export default function UserList() {
     lg: true,
   });
 
-  async function handlePrefetchUser(userId: number) {
+  async function handlePrefetchUser(userId: string) {
     await queryClient.prefetchQuery(['user', userId], async () => {
       const response = await api.get(`users/${userId}`);
 
@@ -104,7 +104,7 @@ export default function UserList() {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {data.users.map((user: any) => (
+                    {data.users.map((user) => (
                       <Tr key={user.id} _hover={{ bg: 'gray.700' }}>
                         <Td px={['2', '4', '6']}>
                           <Checkbox name="chck" id={`chck${user.id}`} colorScheme="pink" />

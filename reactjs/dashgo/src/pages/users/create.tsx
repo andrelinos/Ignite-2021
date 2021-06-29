@@ -1,14 +1,19 @@
+import { useRef } from 'react';
+import Link from 'next/link';
 import {
   Box, Button, Divider, Flex, Heading, HStack, SimpleGrid, useBreakpointValue,
   VStack,
 } from '@chakra-ui/react';
-import Link from 'next/link';
+
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+import { useMutation } from 'react-query';
+
 // import * as yup from 'yup';
 // import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useRef } from 'react';
+import { api } from '../../services/api';
+
 import { Input } from '../../components/Form/Input';
 import { Header } from '../../components/Header';
 import { Sidebar } from '../../components/Sidebar';
@@ -32,6 +37,17 @@ type CreateUserFormData = {
 // });
 
 export default function CreateUser() {
+  const createUser = useMutation(async (user: CreateUserFormData) => {
+    const response = await api.post('users', {
+      user: {
+        ...user,
+        created_at: new Date(),
+      },
+    });
+
+    return response.data.user;
+  });
+
   const {
     register, handleSubmit, formState: { errors }, formState, getValues,
   } = useForm<CreateUserFormData>({
@@ -42,9 +58,7 @@ export default function CreateUser() {
   password.current = getValues('password');
 
   const handleCreateUser: SubmitHandler<CreateUserFormData> = async (values) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    console.log(values);
+    await createUser.mutateAsync(values);
   };
 
   const isWideVersion = useBreakpointValue({

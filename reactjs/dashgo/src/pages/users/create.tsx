@@ -8,6 +8,7 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { useMutation } from 'react-query';
+import { useRouter } from 'next/router';
 
 // import * as yup from 'yup';
 // import { yupResolver } from '@hookform/resolvers/yup';
@@ -17,6 +18,7 @@ import { api } from '../../services/api';
 import { Input } from '../../components/Form/Input';
 import { Header } from '../../components/Header';
 import { Sidebar } from '../../components/Sidebar';
+import { queryClient } from '../../services/queryClient';
 
 type CreateUserFormData = {
   name: string;
@@ -37,6 +39,8 @@ type CreateUserFormData = {
 // });
 
 export default function CreateUser() {
+  const router = useRouter();
+
   const createUser = useMutation(async (user: CreateUserFormData) => {
     const response = await api.post('users', {
       user: {
@@ -46,6 +50,11 @@ export default function CreateUser() {
     });
 
     return response.data.user;
+  },
+  {
+    onSuccess: () => {
+      queryClient.invalidateQueries('users');
+    },
   });
 
   const {
@@ -59,6 +68,8 @@ export default function CreateUser() {
 
   const handleCreateUser: SubmitHandler<CreateUserFormData> = async (values) => {
     await createUser.mutateAsync(values);
+
+    router.push('/users');
   };
 
   const isWideVersion = useBreakpointValue({

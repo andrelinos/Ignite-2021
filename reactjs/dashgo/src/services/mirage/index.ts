@@ -13,7 +13,7 @@ type User = {
 export function makeServer() {
   const server = createServer({
     serializers: {
-      applications: ActiveModelSerializer,
+      application: ActiveModelSerializer,
     },
 
     models: {
@@ -56,7 +56,7 @@ export function makeServer() {
 
         const users = this.serialize(schema.all('user'))
           .users
-          .sort((a, b) => b.created_at - a.created_at)
+          .sort((a, b) => a.createdAt < b.createdAt)
           .slice(pageStart, pageEnd);
 
         return new Response(

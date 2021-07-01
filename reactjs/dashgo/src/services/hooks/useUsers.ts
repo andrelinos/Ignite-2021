@@ -16,9 +16,7 @@ type GetUsersResponse = {
 export async function getUsers(page: number): Promise<GetUsersResponse> {
   const { data, headers } = await api.get('users', {
     params: {
-      params: {
-        page,
-      },
+      page,
     },
   });
 
@@ -35,7 +33,10 @@ export async function getUsers(page: number): Promise<GetUsersResponse> {
     }),
   }));
 
-  return { users, totalCount };
+  return {
+    users,
+    totalCount,
+  };
 }
 
 export function useUsers(page: number) {

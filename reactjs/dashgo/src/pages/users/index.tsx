@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import NextLink from 'next/link';
+import { GetServerSideProps } from 'next';
+
 import {
   Box, Button, Flex, Heading, Text, Icon, Table, Th, Thead, Tr, Checkbox, Tbody,
   Td, FormLabel, useBreakpointValue, Spinner, Link,
@@ -10,17 +12,19 @@ import {
 
 import { api } from '../../services/api';
 import { queryClient } from '../../services/queryClient';
+import { getUsers, useUsers } from '../../services/hooks/useUsers';
 
 import { Header } from '../../components/Header';
 import { Pagination } from '../../components/Pagination';
 import { Sidebar } from '../../components/Sidebar';
-import { useUsers } from '../../services/hooks/useUsers';
 
-export default function UserList() {
+export default function UserList({ users }: any) {
   const [page, setPage] = useState(1);
   const {
     data, isLoading, isFetching, error, refetch,
-  } = useUsers(page);
+  } = useUsers(page, {
+    initialData: users,
+  });
 
   function handleRefetch() {
     refetch();
@@ -167,3 +171,13 @@ export default function UserList() {
     </Box>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { users, totalCount } = await getUsers(1);
+
+  return {
+    props: {
+      users,
+    },
+  };
+};

@@ -108,7 +108,7 @@ export default function UserList({ users }: any) {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {data.users.map((user) => (
+                    {data.users.map((user: any) => (
                       <Tr key={user.id} _hover={{ bg: 'gray.700' }}>
                         <Td px={['2', '4', '6']}>
                           <Checkbox name="chck" id={`chck${user.id}`} colorScheme="pink" />
@@ -160,7 +160,7 @@ export default function UserList({ users }: any) {
                   </Tbody>
                 </Table>
                 <Pagination
-                  totalCountOfRegisters={data.totalCount}
+                  totalCountOfRegisters={users.totalCount}
                   currentPage={page}
                   onPageChange={setPage}
                 />
@@ -178,6 +178,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       users,
+      totalCount,
     },
   };
 };

@@ -18,12 +18,12 @@ import { Header } from '../../components/Header';
 import { Pagination } from '../../components/Pagination';
 import { Sidebar } from '../../components/Sidebar';
 
-export default function UserList({ users }: any) {
+export default function UserList(/* { users } */) {
   const [page, setPage] = useState(1);
   const {
     data, isLoading, isFetching, error, refetch,
   } = useUsers(page, {
-    initialData: users,
+  //  initialData: users,
   });
 
   function handleRefetch() {
@@ -160,7 +160,7 @@ export default function UserList({ users }: any) {
                   </Tbody>
                 </Table>
                 <Pagination
-                  totalCountOfRegisters={users.totalCount}
+                  totalCountOfRegisters={data.totalCount}
                   currentPage={page}
                   onPageChange={setPage}
                 />
@@ -172,7 +172,7 @@ export default function UserList({ users }: any) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+/* export const getServerSideProps: GetServerSideProps = async () => {
   const { users, totalCount } = await getUsers(1);
 
   return {
@@ -181,4 +181,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
       totalCount,
     },
   };
-};
+}; */

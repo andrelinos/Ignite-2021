@@ -22,11 +22,10 @@ export function makeServer() {
 
     factories: {
       user: Factory.extend({
-        name(i: number) {
-        //  return `User ${i + 1}`;
+        name() {
           return faker.name.firstName();
         },
-        email(names: string) {
+        email() {
           return faker.internet.email().toLowerCase();
         },
         createdAt() {
@@ -56,7 +55,7 @@ export function makeServer() {
 
         const users = this.serialize(schema.all('user'))
           .users
-          .sort((a, b) => a.createdAt < b.createdAt)
+          .sort((a, b) => a.title > b.title)
           .slice(pageStart, pageEnd);
 
         return new Response(

@@ -59,12 +59,12 @@ api.interceptors.response.use(response => response,
 
       return new Promise((resolve, reject) => {
         failedRequestQueue.push({
-          onSuccess: (token: string) => {
+          onSuccess: (token) => {
             originalConfig.headers['Authorization'] = `Bearer ${token}`
 
             resolve(api(originalConfig))
           },
-          onFailure: (err: AxiosError) => {
+          onFailure: (err) => {
             reject(err)
           }
         })

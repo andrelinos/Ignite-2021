@@ -33,7 +33,7 @@ export function signOut() {
   destroyCookie(undefined, 'nextauth.token');
   destroyCookie(undefined, 'nextauth.refreshToken');
 //  authChannel.postMessage('signOut')
-//  Router.push('/');
+  Router.push('/');
 }
 
 export const AuthContext = createContext({} as AuthContextData)
@@ -46,11 +46,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { 'nextauth.token': token } = parseCookies()
 
      if(token) {
-      api.get('/me').then(response => {
-        const { email, permissions, roles } = response.data
+      api.get('/me')
+        .then(response => {
+          const { email, permissions, roles } = response.data
 
         setUser({ email, permissions, roles })
-      }).catch(error => {
+      }).catch(() => {
         signOut();
       })
     }
@@ -70,7 +71,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         path: '/'
       })
 
-      setCookie(undefined, 'nextauth.refreshToken', token, { 
+      setCookie(undefined, 'nextauth.refreshToken', refreshToken, { 
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: '/'
       })

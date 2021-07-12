@@ -1,5 +1,6 @@
 import axios, { AxiosError} from 'axios'
 import { parseCookies, setCookie } from 'nookies'
+import { signOut } from '../context/AuthContext'
 
 type FailedRequestQueue = { 
   onSuccess: (token: string) => void 
@@ -8,7 +9,7 @@ type FailedRequestQueue = {
 
 let cookies = parseCookies()
 let isRefreshing = false
-let failedRequestQueue: FailedRequestQueue[]
+let failedRequestQueue = <FailedRequestQueue[]>[]
 
 export const api = axios.create({
   baseURL: 'http://localhost:3333',
@@ -70,8 +71,9 @@ api.interceptors.response.use(response => response,
         })
       })
     } else {
-      // deslogar usuário
+      signOut()
     }
   }
-}
-)
+
+  return Promise.reject(error)
+})

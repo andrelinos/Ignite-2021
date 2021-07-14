@@ -29,11 +29,12 @@ type AuthProviderProps = {
 let authChannel: BroadcastChannel;
 
 export function signOut() {
-  destroyCookie(undefined, 'nextauth.token');
-  destroyCookie(undefined, 'nextauth.refreshToken');
-//  authChannel.postMessage('signOut')
-  Router.push('/');
-}
+
+   destroyCookie(undefined, 'nextauth.token');
+   destroyCookie(undefined, 'nextauth.refreshToken');
+  
+   Router.push('/');
+  } 
 
 export const AuthContext = createContext({} as AuthContextData)
 

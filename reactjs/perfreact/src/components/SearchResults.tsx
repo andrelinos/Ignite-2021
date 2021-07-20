@@ -16,10 +16,10 @@ export default function SearchResults({ results }: ResultProps) {
     <Flex flexDir="column" w="100%" h="100%">
       {results.length > 0 && (
         <>
-          <Text mx="auto" my="1rem" fontSize={24}>
-            Resultados
+          <Text mx="auto" my="1rem" fontSize={18}>
+          {results.length} Resultados para sua pesquisa.
           </Text>
-          <Flex w="100%" h="100%" bg="gray.600">
+          <Flex w="100%" h="100%">
             {results.map((product) => {
               <ProductItem product={product} />;
             })}

@@ -1,5 +1,6 @@
 import { Flex, Box, Text, Grid, GridItem, Image } from '@chakra-ui/react';
-import ProductItem from './ProductItem';
+import { useMemo } from 'react';
+import { ProductItem } from './ProductItem';
 
 type SearchResultsProps = {
   id: number;
@@ -13,12 +14,18 @@ interface ResultProps {
 }
 
 export default function SearchResults({ results }: ResultProps) {
+  const totalPrice = useMemo(() => {
+    return results.reduce((total, product) => {
+      return total + product.price;
+    }, 0)
+  }, [results])
+
   return (
     <Flex flexDir="column" w="100%" h="100%">
       {results.length > 0 && (
         <>
           <Text mx="auto" my="1rem" fontSize={18}>
-          {results.length} Resultados para sua pesquisa.
+          {results.length} Resultados para sua pesquisa. (Total: R${totalPrice},00)
           </Text>
           <Grid mx="auto" templateColumns="repeat(5, 1fr)" gap="40px">
           {results.map((product) => (

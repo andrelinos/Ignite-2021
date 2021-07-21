@@ -1,5 +1,5 @@
 module.exports = () => {
-  const data = { 
+  const data = {
     products: []
   }
 
@@ -7,7 +7,8 @@ module.exports = () => {
     data.products.push({
       id: i + 1,
       price: Math.floor(Math.random() * 10 * 100 / 3 ),
-      title: `Camiseta ${i + 1}`
+      title: `Camiseta ${i + 1}`,
+      image: `https://picsum.photos/id/${i}/200/300`
     })
   }
 

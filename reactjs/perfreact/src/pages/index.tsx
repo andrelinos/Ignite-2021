@@ -23,7 +23,7 @@ export default function Index() {
   }
 
   return (
-    <Flex flexDir="column" align="center" w="100vw" h="100vh">
+    <Flex flexDir="column" align="center" w="100%" h="100%">
       <DarkModeSwitch />
       <Text my="2rem" fontSize={42}>
         Buscar

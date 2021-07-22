@@ -37,6 +37,7 @@ export default function Index() {
         id: product.id,
         title: product.title,
         price: product.price,
+        image: product.image,
         priceFormatted: formatter.format(product.price),
       };
     });

@@ -1,13 +1,21 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import { Flex, Text, Input, Button } from '@chakra-ui/react';
 
 import { DarkModeSwitch } from '../components/DarkModeSwitch';
 
 import SearchResults from '../components/SearchResults';
 
+type Results = {
+  totalPrice: number;
+  data: any[];
+};
+
 export default function Index() {
   const [search, setSearch] = useState('');
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<Results>({
+    totalPrice: 0,
+    data: [],
+  });
 
   async function handleSearch(e: FormEvent) {
     e.preventDefault();
@@ -19,8 +27,31 @@ export default function Index() {
     const response = await fetch(`http://localhost:3333/products?q=${search}`);
     const data = await response.json();
 
-    setResults(data);
+    const formatter = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+
+    const products = data.map((product) => {
+      return {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        priceFormatted: formatter.format(product.price),
+      };
+    });
+
+    const totalPrice = data.reduce((total, product) => {
+      return total + product.price;
+    }, 0);
+
+
+    setResults({ totalPrice, data: products });
   }
+
+  const handleAddToWishList = useCallback(async (id: number) => {
+    console.log(id);
+  }, []);
 
   return (
     <Flex flexDir="column" align="center" w="100%" h="100%">
@@ -42,7 +73,11 @@ export default function Index() {
         </Button>
       </Flex>
       <Flex w="100%" h="100%">
-        <SearchResults results={results} />
+        <SearchResults
+          results={results.data}
+          totalPrice={results.totalPrice}
+          onAddToWishlist={handleAddToWishList}
+        />
       </Flex>
     </Flex>
   );

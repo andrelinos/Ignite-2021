@@ -3,19 +3,22 @@ import { Flex } from '@chakra-ui/react';
 
 type ProductProps = {
   id: number;
-  price: number;
   title: string;
   image: string;
+  price: number;
+  priceFormatted: string;
 };
 
 interface ProductItemProps {
   product: ProductProps;
+  onAddToWishlist: (id: number) => void;
 }
 
-function ProductItemComponent({ product }: ProductItemProps) {
+function ProductItemComponent({ product, onAddToWishlist }: ProductItemProps) {
   return (
     <Flex w="100%" my="0.5rem" justify="space-between">
-      {product.title} - <strong>R${product.price},00</strong>
+      {product.title} - <strong>{product.priceFormatted}</strong>
+      <button onClick={() => onAddToWishlist(product.id)}>Add to wishlist</button>
     </Flex>
   );
 }

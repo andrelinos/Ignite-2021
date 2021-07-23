@@ -30,7 +30,7 @@ export default function SearchResults({
             {results.length} Resultados para sua pesquisa. (Total: R$
             {totalPrice},00)
           </Text>
-          <Grid mx="auto" templateColumns="repeat(5, 1fr)" gap="40px">
+          <Grid mx="auto" templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)',"repeat(5, 1fr)"]} gap="40px">
             {results.map((product) => (
               <Box
                 mb="1rem"

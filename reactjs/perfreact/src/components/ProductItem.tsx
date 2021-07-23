@@ -1,5 +1,16 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
+
+import { AddProductToWishListProps } from './AddProductToWishList';
+// import { AddProductToWishList } from './AddProductToWishList';
+
+const AddProductToWishList = dynamic<AddProductToWishListProps>(async () => {
+  const mod = await import('./AddProductToWishList');
+  return mod.AddProductToWishList;
+}, {
+  loading: () => <span>Carregando...</span>
+});
 
 type ProductProps = {
   id: number;
@@ -15,10 +26,18 @@ interface ProductItemProps {
 }
 
 function ProductItemComponent({ product, onAddToWishlist }: ProductItemProps) {
+  const [isAddingToWishList, setIsAddingToWishList] = useState(false);
+
   return (
     <Flex w="100%" my="0.5rem" justify="space-between">
       {product.title} - <strong>{product.priceFormatted}</strong>
-      <button onClick={() => onAddToWishlist(product.id)}>Add to wishlist</button>
+      <button onClick={() => setIsAddingToWishList(true)}>Favoritar</button>
+      {isAddingToWishList && (
+        <AddProductToWishList
+          onAddToWishList={() => onAddToWishlist(product.id)}
+          onRequestClose={() => setIsAddingToWishList(false)}
+        />
+      )}
     </Flex>
   );
 }

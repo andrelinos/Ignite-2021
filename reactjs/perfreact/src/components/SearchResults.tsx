@@ -1,5 +1,5 @@
 import { Flex, Box, Text, Grid, GridItem, Image } from '@chakra-ui/react';
-import { useMemo } from 'react';
+import { List, ListRowRenderer } from 'react-virtualized';
 import { ProductItem } from './ProductItem';
 
 type SearchResultsProps = {
@@ -22,6 +22,17 @@ export default function SearchResults({
   onAddToWishlist,
 }: ResultProps) {
 
+  const rowRenderer: ListRowRenderer = ({ index, key, style }) => {
+    return (
+      <div key={key} style={style}>
+        <ProductItem
+        product={results[index]}
+        onAddToWishlist={onAddToWishlist}
+      />
+      </div>
+    )
+  }
+
   return (
     <Flex flexDir="column" w="100%" h="100%">
       {results.length > 0 && (
@@ -31,7 +42,15 @@ export default function SearchResults({
             {totalPrice},00)
           </Text>
           <Grid mx="auto" templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)',"repeat(5, 1fr)"]} gap="40px">
-            {results.map((product) => (
+            <List
+              width={900}
+              height={300}
+              rowHeight={30}
+              overscanRowCount={5}
+              rowCount={results.length}
+              rowRenderer={rowRenderer}
+            />
+            {/* {results.map((product) => (
               <Box
                 mb="1rem"
                 borderRadius="0.215rem"
@@ -56,7 +75,7 @@ export default function SearchResults({
                   onAddToWishlist={onAddToWishlist}
                 />
               </Box>
-            ))}
+            ))} */}
           </Grid>
         </>
       )}

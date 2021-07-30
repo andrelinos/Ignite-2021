@@ -1,22 +1,18 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
-import { signIn } from 'next-auth/client';
+import { signIn, useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { SubscribeButton } from '.';
 
-jest.mock('next-auth/client', () => {
-  return {
-    useSession() {
-      return [null, false];
-    },
-    signIn: jest.fn()
-  };
-});
-
+jest.mock('next-auth/client');
 jest.mock('next/router');
 
 describe('SubscribeButton component', () => {
   it('renders correctly', () => {
+    const useSessionMocked = mocked(useSession);
+
+    useSessionMocked.mockReturnValueOnce([null, false]);
+
     render(<SubscribeButton />);
 
     expect(screen.getByText('Subscribe now')).toBeInTheDocument;
@@ -24,6 +20,9 @@ describe('SubscribeButton component', () => {
 
   it('rendirects user to sign in when not authenticated', () => {
     const signInMocked = mocked(signIn);
+    const useSessionMocked = mocked(useSession);
+
+    useSessionMocked.mockReturnValueOnce([null, false]);
 
     render(<SubscribeButton />);
 
@@ -36,8 +35,17 @@ describe('SubscribeButton component', () => {
 
   it('redirects tp posts when user already has a subscription', () => {
     const useRouterMocked = mocked(useRouter);
-
+    const useSessionMocked = mocked(useSession);
     const pushMocked = jest.fn();
+
+    useSessionMocked.mockReturnValueOnce([
+      {
+        user: { name: 'John Doe', email: 'john.doe@example.com' },
+        activeSubscription: 'fake-active-subscription',
+        expires: 'fake-expires'
+      },
+      false
+    ]);
 
     useRouterMocked.mockReturnValueOnce({
       push: pushMocked
@@ -49,6 +57,6 @@ describe('SubscribeButton component', () => {
 
     fireEvent.click(subscribeButton);
 
-    expect(pushMocked).toHaveBeenCalled();
+    expect(pushMocked).toHaveBeenCalledWith('/posts');
   });
 });

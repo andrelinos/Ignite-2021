@@ -1,8 +1,3 @@
----
-title: "Ignews"
-output: html_document
----
-
 # IGNEWS
 Aplicação para iscrição em newsletter com assinatura via stripe.
 
@@ -222,46 +217,16 @@ Distribuído sob a licença MIT. Veja [LICENSE](LICENSE) para mais informações
 ---
 
 ## Autor
-<div
-  style="
-    width: 100%;
-    background: #141414;
-    border-radius: 8px;
-    display:flex;
-    justify-content: space-beteen;
-    align-items: center;
-    flex-wrap: wrap;
-  ">
-<span
-  style="
-    max-width: 260px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 4px;
-    text-align: center;
-   ">
-<img
-  style="
-    max-width:150px;
-    border-radius: 4px;"
+<img  width="150px"
     src="https://github.com/andrelinos.png"
     alt="Avatar do autor" />
 <sub><br /><b>
 Andrelino Silva 🚀</b></sub></a>
-</span>
-<div style="margin-left:10px; flex:3">
-<p
-style="
-  color: #9759c1;
-  padding: 40px 0 40px;
-  width: 100%;
-  ">
-    Sou apaixonado por tecnologias e quero muito criar coisas grandes e de ajudar as pessoas. Estou na luta para estudar e conciliar família, estudos, trabalho.
-  </p>
 
-  <div style="flex: 1; background: #202024;overflow-x: scroll">
+<p>
+    Sou apaixonado por tecnologias e quero muito criar coisas grandes e de ajudar as pessoas. Estou na luta para estudar e conciliar família, estudos, trabalho.
+</p>
+
 
   | Rede social | Saiba mais |
   | --- | --- |

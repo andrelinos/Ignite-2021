@@ -217,11 +217,12 @@ Distribuído sob a licença MIT. Veja [LICENSE](LICENSE) para mais informações
 ---
 
 ## Autor
-<img  width="150px"
+<a href="https://app.rocketseat.com.br/me/andrelinosilva">
+<img  width="150px" style="border-radius:50%"
     src="https://github.com/andrelinos.png"
     alt="Avatar do autor" />
-<sub><br /><b>
-Andrelino Silva 🚀</b></sub></a>
+<br /><b>
+Andrelino Silva 🚀</b></a>
 
 <p>
     Sou apaixonado por tecnologias e quero muito criar coisas grandes e de ajudar as pessoas. Estou na luta para estudar e conciliar família, estudos, trabalho.

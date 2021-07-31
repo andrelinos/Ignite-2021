@@ -218,7 +218,7 @@ Distribuído sob a licença MIT. Veja [LICENSE](LICENSE) para mais informações
 
 ## Autor
 <a href="https://app.rocketseat.com.br/me/andrelinosilva">
-<img  width="150px" border-radius="50%"
+<img height="150" width="150" style="border-radius:50%"
     src="https://github.com/andrelinos.png"
     alt="Avatar do autor" />
 <br /><b>

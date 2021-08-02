@@ -13,7 +13,7 @@ Aplicação para iscrição em newsletter com assinatura via stripe.
 
 <br />
 <br />
-
+<img src="./prtscn/home.png"/>
 ## Sobre
 ---
 Este projeto tem como objetivo de estudo o desenvolvimento de aplicações ReactJS com o framework [NextJS](https://nextjs.org/) (criado pela [Vercel](https://vercel.com/)) aplicado neste exemplo para controle de listagem de posts em um sistema de inscrição por assinatura.

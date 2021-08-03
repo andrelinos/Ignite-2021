@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetStaticProps } from 'next';
 import { useSession } from 'next-auth/client';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -16,15 +16,15 @@ type PostPreviewProps = {
     title: string;
     content: string;
     updatedAt: string;
-  }
-}
+  };
+};
 
 export default function PostPreview({ post }: PostPreviewProps) {
   const [session] = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if(session?.activeSubscription) {
+    if (session?.activeSubscription) {
       router.push(`/posts/${post.slug}`);
     }
   }, [session]);
@@ -44,13 +44,14 @@ export default function PostPreview({ post }: PostPreviewProps) {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-  <div className={styles.continueReading}>
-    Wanna continue reading?
-    <Link href="/">
-    <><a href="/">Subscribe now</a> 🤗</>
-    </Link>
-  </div>
-
+          <div className={styles.continueReading}>
+            <span>Wanna continue reading?</span>
+            <Link href="/">
+              <>
+                <a href="/">Subscribe now</a> 🤗
+              </>
+            </Link>
+          </div>
         </article>
       </main>
     </>
@@ -61,8 +62,8 @@ export const getStaticPaths = () => {
   return {
     paths: [],
     fallback: 'blocking'
-  }
-}
+  };
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params;
@@ -75,17 +76,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     slug,
     title: RichText.asText(response.data.title),
     content: RichText.asHtml(response.data.content.splice(0, 1)),
-    updatedAt: new Date(response.last_publication_date).toLocaleDateString('pt-br', {
-      day: '2-digit',
-      month: ('long'),
-      year: 'numeric'
-    }),
+    updatedAt: new Date(response.last_publication_date).toLocaleDateString(
+      'pt-br',
+      {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      }
+    )
   };
 
   return {
     props: {
-      post,
+      post
     },
-    revalidate: 60 * 30, // 30 minutes
-  }
-}
+    revalidate: 60 * 30 // 30 minutes
+  };
+};

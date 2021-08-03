@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 import { mocked } from 'ts-jest/utils';
 
 import Post, { getStaticProps } from '../../pages/posts/preview/[slug]';
@@ -13,6 +14,7 @@ const post = {
 };
 
 jest.mock('next-auth/client');
+jest.mock('next/router');
 jest.mock('../../services/prismic');
 
 describe('Posts preview page', () => {
@@ -28,65 +30,51 @@ describe('Posts preview page', () => {
     expect(screen.getByText('Wanna continue reading?')).toBeInTheDocument();
   });
 
-  // it('redirects user if no subscription is found', async () => {
-  //   const getSessionMocked = mocked(getSession);
+  it('redirects user full post when usre is subscribed', async () => {
+    const useSessionMocked = mocked(useSession);
+    const useRouterMocked = mocked(useRouter);
+    const pushMocked = jest.fn();
 
-  //   getSessionMocked.mockResolvedValueOnce({
-  //     activeSubscription: null
-  //   } as any);
+    useSessionMocked.mockReturnValueOnce([
+      { activeSubscription: 'fake-active-subscription' },
+      false
+    ] as any);
 
-  //   const response = await getServerSideProps({
-  //     req: {
-  //       cookies: {}
-  //     },
-  //     params: { slug: 'my-new-post' }
-  //   } as any);
+    useRouterMocked.mockReturnValueOnce({
+      push: pushMocked
+    } as any);
 
-  //   expect(response).toEqual(
-  //     expect.objectContaining({
-  //       redirect: expect.objectContaining({
-  //         destination: '/'
-  //       })
-  //     })
-  //   );
-  // });
-  // it('loads initial data', async () => {
-  //   const getSessionMocked = mocked(getSession);
+    render(<Post post={post} />);
 
-  //   const getPrismicClientMocked = mocked(getPrismicClient);
+    expect(pushMocked).toHaveBeenCalledWith('/posts/my-new-post');
+  });
 
-  //   getPrismicClientMocked.mockReturnValueOnce({
-  //     getByUID: jest.fn().mockResolvedValueOnce({
-  //       data: {
-  //         title: [{ type: 'heading', text: 'My New Post' }],
-  //         content: [{ type: 'paragraph', text: 'Post content' }]
-  //       },
-  //       last_publication_date: '07-10-2021'
-  //     })
-  //   } as any);
+  it('loads initial data', async () => {
+    const getPrismicClientMocked = mocked(getPrismicClient);
 
-  //   getSessionMocked.mockResolvedValueOnce({
-  //     activeSubscription: 'fake-active-subscription'
-  //   });
+    getPrismicClientMocked.mockReturnValueOnce({
+      getByUID: jest.fn().mockResolvedValueOnce({
+        data: {
+          title: [{ type: 'heading', text: 'My New Post' }],
+          content: [{ type: 'paragraph', text: 'Post content' }]
+        },
+        last_publication_date: '07-10-2021'
+      })
+    } as any);
 
-  //   const response = await getServerSideProps({
-  //     req: {
-  //       cookies: {}
-  //     },
-  //     params: { slug: 'my-new-post' }
-  //   } as any);
+    const response = await getStaticProps({ params: { slug: 'my-new-post' } });
 
-  //   expect(response).toEqual(
-  //     expect.objectContaining({
-  //       props: {
-  //         post: {
-  //           slug: 'my-new-post',
-  //           title: 'My New Post',
-  //           content: '<p>Post content</p>',
-  //           updatedAt: '10 de julho de 2021'
-  //         }
-  //       }
-  //     })
-  //   );
-  // });
+    expect(response).toEqual(
+      expect.objectContaining({
+        props: {
+          post: {
+            slug: 'my-new-post',
+            title: 'My New Post',
+            content: '<p>Post content</p>',
+            updatedAt: '10 de julho de 2021'
+          }
+        }
+      })
+    );
+  });
 });

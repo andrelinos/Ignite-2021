@@ -13,9 +13,10 @@ test('it renders correctly', async () => {
 
   await waitFor(() => {
     return (
-      expect(screen.getByText('Maria')).toBeInTheDocument()
-      // expect(screen.queryByText('Juliana')).toBeInTheDocument()
+      expect(screen.getByText('Maria')).toBeInTheDocument(),
+      expect(screen.getByText('Juliana')).toBeInTheDocument()
     );
   });
 
+  //await waitForElementToBeRemoved(screen.queryByText('Maria'));
 });

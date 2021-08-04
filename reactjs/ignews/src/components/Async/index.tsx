@@ -7,20 +7,20 @@ export function Async() {
   useEffect(() => {
     setTimeout(() => {
       setIsButtonVisible(true);
-    }, 1000)
-  },[])
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
       setIsButtonInvisible(true);
-    }, 1000)
-  },[])
+    }, 1000);
+  }, []);
 
   return (
     <div>
       <div>Hello world</div>
-      { isButtonVisible && <button>Maria</button>}
-      { !isButtonInvisible && <button>Juliana</button>}
+      <main>{isButtonVisible && <button>Maria</button>}</main>
+      <footer>{!isButtonInvisible && <button>Juliana</button>}</footer>
     </div>
-  )
+  );
 }

@@ -3,14 +3,24 @@ module.exports = {
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/.next/',
-    '<rootDir>/.vscode/',
+    '<rootDir>/.vscode/'
   ],
   setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts'],
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest'
   },
   testEnvironment: 'jsdom',
   moduleNameMapper: {
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy'
   },
+  collectCoverage: true,
+  collectCoverageFrom: [
+    '**/*.tsx',
+    '!**/_app.tsx',
+    '!**/_document.tsx',
+    '!**/*.spec.tsx',
+    '!**/node_modules/**',
+    '!**/vendor/**'
+  ],
+  coverageReporters: ["lcov", "json"]
 };

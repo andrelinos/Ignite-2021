@@ -25,6 +25,8 @@ describe('Posts preview page', () => {
 
     render(<Post post={post} />);
 
+    // screen.logTestingPlaygroundURL();
+
     expect(screen.getByText('My New Post')).toBeInTheDocument();
     expect(screen.getByText('Post content')).toBeInTheDocument();
     expect(screen.getByText('Wanna continue reading?')).toBeInTheDocument();

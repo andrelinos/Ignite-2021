@@ -3,15 +3,16 @@ import Head from 'next/head';
 
 import { SubscribeButton } from '../components/SubscribeButton';
 import { stripe } from '../services/stripe';
-
 import styles from '../styles/pages/home.module.scss';
 
-interface HomeProps {
-  product: {
-    priceId: string;
-    amount: string;
-  };
-}
+type ProductProps = {
+  priceId: string;
+  amount: string;
+};
+
+type HomeProps = {
+  product: ProductProps;
+};
 
 export default function Home({ product }: HomeProps) {
   return (
@@ -40,22 +41,25 @@ export default function Home({ product }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const price = await stripe.prices.retrieve('price_1IqyfiL1D4bzO7lGpwrcbLmC', {
-    expand: ['product']
-  });
+  const price = await stripe.prices.retrieve(
+    process.env.NEXT_PRODUCT_PRICE_ID,
+    {
+      expand: ['product'],
+    },
+  );
 
   const product = {
     priceId: price.id,
     amount: new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
-    }).format(price.unit_amount / 100)
+      currency: 'USD',
+    }).format(price.unit_amount / 100),
   };
 
   return {
     props: {
-      product
+      product,
     },
-    revalidate: 60 * 60 * 24 // 24 hours
+    revalidate: 60 * 60 * 24, // 24 hours
   };
 };

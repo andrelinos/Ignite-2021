@@ -10,14 +10,14 @@ export async function saveSubscription(
 ) {
   const userRef = await fauna.query(
     q.Select(
-      "ref",
+      'ref',
       q.Get(
         q.Match(
           q.Index('user_by_stripe_customer_id'),
           customerId,
         ),
       ),
-    )
+    ),
   );
 
   const subscription = await stripe.subscriptions.retrieve(subscriptionId);
@@ -37,27 +37,23 @@ export async function saveSubscription(
             q.Exists(
               q.Match(
                 q.Index('subscription_by_id'),
-                q.Casefold(subscription.id)
-              )
-            )
+                q.Casefold(subscription.id),
+              ),
+            ),
           ),
           q.Create(
             q.Collection('subscriptions'),
             {
-              data: subscriptionData
+              data: subscriptionData,
             },
           ),
           q.Get(
             q.Match(
               q.Index('subscription_by_id'),
-              q.Casefold(subscription.id)
-            )
-          )
-        )
-        /* q.Create(
-          q.Collection('subscriptions'),
-          { data: subscriptionData },
-        ), */
+              q.Casefold(subscription.id),
+            ),
+          ),
+        ),
       );
     } catch (err) {
       throw new Error('Error save subscriptions.');
@@ -66,17 +62,16 @@ export async function saveSubscription(
     await fauna.query(
       q.Replace(
         q.Select(
-          "ref",
+          'ref',
           q.Get(
             q.Match(
               q.Index('subscription_by_id'),
               subscriptionId,
-            )
-          )
+            ),
+          ),
         ),
-        { data: subscriptionData }
-      )
-    )
+        { data: subscriptionData },
+      ),
+    );
   }
-
-};
+}

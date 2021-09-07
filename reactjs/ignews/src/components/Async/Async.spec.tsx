@@ -2,8 +2,8 @@ import {
   render,
   screen,
   waitFor,
-  waitForElementToBeRemoved
 } from '@testing-library/react';
+
 import { Async } from '.';
 
 test('it renders correctly', async () => {
@@ -11,12 +11,11 @@ test('it renders correctly', async () => {
 
   expect(screen.getByText('Hello world')).toBeInTheDocument();
 
-  await waitFor(() => {
-    return (
-      expect(screen.getByText('Maria')).toBeInTheDocument(),
-      expect(screen.getByText('Juliana')).toBeInTheDocument()
-    );
-  });
+  await waitFor(() => (
+    expect(screen.getByText('Maria')).toBeInTheDocument()
+  ));
 
-  //await waitForElementToBeRemoved(screen.queryByText('Maria'));
+  await waitFor(() => (
+    expect(screen.getByText('Juliana')).toBeInTheDocument()
+  ));
 });

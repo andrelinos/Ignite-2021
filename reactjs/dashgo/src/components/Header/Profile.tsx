@@ -13,7 +13,7 @@ export function Profile({ showProfileData = true }: ProfileProps) {
         <Box mr="4" textAlign="right">
           <Text>Andrelino Silva</Text>
           <Text color="gray.300" fontSize="sm">
-            andrelinodev@gmail.com
+            andrelinodev@dashgo-andrelinos.vercel.app
           </Text>
         </Box>
       )}

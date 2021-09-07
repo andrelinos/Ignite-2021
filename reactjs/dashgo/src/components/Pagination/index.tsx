@@ -96,8 +96,7 @@ export function Pagination({
 
         {(currentPage + siblingsCount) < lastPage && (
           <>
-            {(currentPage + 1 + siblingsCount) < lastPage
-            && (
+            {(currentPage + 1 + siblingsCount) < lastPage && (
             <Text
               as="span"
               color="gray.300"

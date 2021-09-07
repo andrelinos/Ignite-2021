@@ -1,3 +1,12 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .signInButton {
   height: 3rem;
   border-radius: 3rem;
@@ -11,6 +20,8 @@
   color: var(--white);
   font-weight: bold;
 
+  transition: all 0.2s;
+
   svg {
     width: 20px;
     height: 20px;
@@ -23,9 +34,29 @@
   .closeIcon {
     margin-left: 1rem;
   }
+
   transition: filter 0.2s;
 
   &:hover {
     filter: brightness(0.85);
+  }
+
+  &.loading {
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+
+    cursor: not-allowed;
+
+    &:hover {
+      filter: none;
+    }
+
+    svg {
+      cursor: not-allowed;
+      animation: rotate 1s linear infinite;
+      margin-right: 0;
+      margin-left: 0;
+    }
   }
 }

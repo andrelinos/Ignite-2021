@@ -6,17 +6,20 @@ import { useRouter } from 'next/router';
 import { RichText } from 'prismic-dom';
 import { useEffect } from 'react';
 
+import { Footer } from '../../../components/Footer';
 import { getPrismicClient } from '../../../services/prismic';
-
 import styles from '../post.module.scss';
 
+type PostProps = {
+  slug: string;
+  title: string;
+  banner?: string;
+  content: string;
+  updatedAt: string;
+}
+
 type PostPreviewProps = {
-  post: {
-    slug: string;
-    title: string;
-    content: string;
-    updatedAt: string;
-  };
+  post: PostProps;
 };
 
 export default function PostPreview({ post }: PostPreviewProps) {
@@ -38,9 +41,11 @@ export default function PostPreview({ post }: PostPreviewProps) {
       <main className={styles.container}>
         <article className={styles.post}>
           <h1>{post.title}</h1>
+          <img src={post.banner} alt={post.title} />
           <time>{post.updatedAt}</time>
           <div
             className={`${styles.postContent} ${styles.previewContent}`}
+            // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
@@ -54,18 +59,19 @@ export default function PostPreview({ post }: PostPreviewProps) {
           </div>
         </article>
       </main>
+      <Footer />
     </>
   );
 }
 
-export const getStaticPaths = () => {
-  return {
-    paths: [],
-    fallback: 'blocking'
-  };
-};
+export const getStaticPaths = () => ({
+  paths: [],
+  fallback: 'blocking',
+});
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}) => {
   const { slug } = params;
 
   const prismic = getPrismicClient();
@@ -74,6 +80,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const post = {
     slug,
+    banner: response.data.banner.url,
     title: RichText.asText(response.data.title),
     content: RichText.asHtml(response.data.content.splice(0, 1)),
     updatedAt: new Date(response.last_publication_date).toLocaleDateString(
@@ -81,15 +88,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       {
         day: '2-digit',
         month: 'long',
-        year: 'numeric'
-      }
-    )
+        year: 'numeric',
+      },
+    ),
   };
 
   return {
     props: {
-      post
+      post,
     },
-    revalidate: 60 * 30 // 30 minutes
+    revalidate: 60 * 30, // 30 minutes
   };
 };

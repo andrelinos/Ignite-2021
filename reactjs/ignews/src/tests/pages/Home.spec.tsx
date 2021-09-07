@@ -1,15 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
 
-import { stripe } from '../../services/stripe';
 import Home, { getStaticProps } from '../../pages';
+import { stripe } from '../../services/stripe';
 
 jest.mock('next/router');
-jest.mock('next-auth/client', () => {
-  return {
-    useSession: () => [null, false]
-  };
-});
+jest.mock('next-auth/client', () => ({
+  useSession: () => [null, false],
+}));
 jest.mock('../../services/stripe');
 
 describe('Home page', () => {
@@ -24,7 +22,7 @@ describe('Home page', () => {
 
     retrieveStripePricesMocked.mockResolvedValueOnce({
       id: 'fake-prices-id',
-      unit_amount: 1500
+      unit_amount: 1500,
     } as any);
 
     const response = await getStaticProps({});
@@ -34,10 +32,10 @@ describe('Home page', () => {
         props: {
           product: {
             priceId: 'fake-prices-id',
-            amount: '$15.00'
-          }
-        }
-      })
+            amount: '$15.00',
+          },
+        },
+      }),
     );
   });
 });

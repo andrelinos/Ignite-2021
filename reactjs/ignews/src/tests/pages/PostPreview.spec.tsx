@@ -9,8 +9,9 @@ import { getPrismicClient } from '../../services/prismic';
 const post = {
   slug: 'my-new-post',
   title: 'My New Post',
+  banner: '<img src="http://localhost:8080/images/image.jpg" />',
   content: '<p>Post content</p>',
-  updatedAt: '10 de Julho'
+  updatedAt: '10 de Julho',
 };
 
 jest.mock('next-auth/client');
@@ -39,11 +40,11 @@ describe('Posts preview page', () => {
 
     useSessionMocked.mockReturnValueOnce([
       { activeSubscription: 'fake-active-subscription' },
-      false
+      false,
     ] as any);
 
     useRouterMocked.mockReturnValueOnce({
-      push: pushMocked
+      push: pushMocked,
     } as any);
 
     render(<Post post={post} />);
@@ -58,10 +59,10 @@ describe('Posts preview page', () => {
       getByUID: jest.fn().mockResolvedValueOnce({
         data: {
           title: [{ type: 'heading', text: 'My New Post' }],
-          content: [{ type: 'paragraph', text: 'Post content' }]
+          content: [{ type: 'paragraph', text: 'Post content' }],
         },
-        last_publication_date: '07-10-2021'
-      })
+        last_publication_date: '07-10-2021',
+      }),
     } as any);
 
     const response = await getStaticProps({ params: { slug: 'my-new-post' } });
@@ -73,10 +74,10 @@ describe('Posts preview page', () => {
             slug: 'my-new-post',
             title: 'My New Post',
             content: '<p>Post content</p>',
-            updatedAt: '10 de julho de 2021'
-          }
-        }
-      })
+            updatedAt: '10 de julho de 2021',
+          },
+        },
+      }),
     );
   });
 });

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { mocked } from 'ts-jest/utils';
 import { useSession } from 'next-auth/client';
+import { mocked } from 'ts-jest/utils';
+
 import { SignInButton } from '.';
 
 jest.mock('next-auth/client');
@@ -20,9 +21,9 @@ describe('SignInButton component', () => {
     useSessionMocked.mockReturnValueOnce([
       {
         user: { name: 'John Doe', email: 'john.doe@example.com' },
-        expires: 'fake-expires'
+        expires: 'fake-expires',
       },
-      false
+      false,
     ]);
 
     render(<SignInButton />);

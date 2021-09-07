@@ -1,6 +1,7 @@
 .container {
   max-width: 1120px;
-  margin: 0 auto;
+  height: 100%;
+  margin: 0 auto 4rem;
   padding: 0 2rem;
 }
 
@@ -10,14 +11,28 @@
 
   a {
     display: block;
-    padding: 1rem 0;
+    padding: 1rem;
+    flex-grow: 1;
+    border-radius: 8px;
+    transition: all 0.32s;
+    background: var(--gray-800);
 
-    transition: background 0.2s;
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      img {
+        width: 8rem;
+        height: 8rem;
+        background: var(--gray-400);
+        border-radius: 8px;
+        margin-left: 1rem;
+      }
+    }
 
     & + a {
       margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--gray-700);
     }
 
     time {
@@ -43,15 +58,11 @@
     }
 
     &:hover {
-      background: var(--bg-post);
+      background: var(--gray-825);
     }
 
     &:hover strong {
       color: var(--yellow-500);
     }
-
-
-
-
   }
 }

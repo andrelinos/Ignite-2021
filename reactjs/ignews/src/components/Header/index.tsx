@@ -1,6 +1,5 @@
-import { SignInButton } from '../SignInButton';
 import { ActiveLink } from '../../components/ActiveLink';
-
+import { SignInButton } from '../SignInButton';
 import styles from './styles.module.scss';
 
 export function Header() {

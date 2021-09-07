@@ -21,7 +21,7 @@ Este projeto tem como objetivo de estudo o desenvolvimento de aplicações React
 Foi projeto usando a exemplo o consumo de API externas, API Root, Server Side Rendering (SSR), Static Site Generation (SSG), [STRIPE](https://stripe.com/) (plataforma de pagamentos) para o gerenciamento das assinaturas, [NextAuth.js](https://next-auth.js.org/) para a autenticação com o Github, [FaunaDB](https://fauna.com/) para armazenar informações dos usuários em banco de dados e [Prismic CMS](https://prismic.io/) para gerenciar o conteúdo da newsletter.
 
 - Projeto desenvolvido na prática durante as aulas do [Ignite](https://rocketseat.com.br/ignite) da [Rocketseat](https://rocketseat.com.br/)
-
+- Demo do projeto: [https://ignews-andrelinos.vercel.app](https://ignews-andrelinos.vercel.app)
 
 <br />
 <br />
@@ -198,7 +198,7 @@ $ yarn stripe
 yarn dev
 ```
 
-87 Pronto, basta abrir a aplicação em seu navegador acessando o endereço [http://localhost:3000](http://localhost:3000) e testar suas funcionalidades.
+Pronto, basta abrir a aplicação em seu navegador acessando o endereço [http://localhost:3000](http://localhost:3000) e testar suas funcionalidades.
 
 <br />
 <br />
@@ -234,7 +234,7 @@ Andrelino Silva 🚀</b></a>
   | Rede social | Saiba mais |
   | --- | --- |
   | GitHub | [https://github.com/andrelinos](https://github.com/andrelinos) |
-  | Linkedin | [https://linkedin.com// in/andrelinosilva](https://linkedin.com//in/andrelinosilva) |
+  | Linkedin | [https://linkedin.com// in/andrelinosilva](https://linkedin.com/in/andrelinosilva) |
   | Twitter| [https://twitter.com/ _andrelinosilva](https://twitter.com/_andrelinosilva) |
   | Facebook | [https://facebook.com/ andrelinossilva](https://facebook.com/andrelinossilva/) |
   | Instagram| [https://instagram.com/andrelinossilva](https://instagram.com/andrelinossilva/) |

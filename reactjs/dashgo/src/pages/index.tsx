@@ -1,3 +1,5 @@
+import Router from 'next/router';
+
 import {
   Flex, Stack, Button, Text, Box,
 } from '@chakra-ui/react';
@@ -20,6 +22,10 @@ type SignInFormData = {
 // });
 
 export default function SignIn() {
+  function handleNavToDashboard() {
+    Router.push('/dashboard');
+  }
+
   const {
     register, handleSubmit, formState: { errors }, formState,
   } = useForm<SignInFormData>({
@@ -29,7 +35,7 @@ export default function SignIn() {
   const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    console.log(values);
+    handleNavToDashboard();
   };
 
   return (

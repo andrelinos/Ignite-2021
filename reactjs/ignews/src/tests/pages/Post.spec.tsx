@@ -9,7 +9,7 @@ const post = {
   slug: 'my-new-post',
   title: 'My New Post',
   content: '<p>Post content</p>',
-  updatedAt: '10 de Julho'
+  updatedAt: '10 de Julho',
 };
 
 jest.mock('next-auth/client');
@@ -27,22 +27,22 @@ describe('Posts page', () => {
     const getSessionMocked = mocked(getSession);
 
     getSessionMocked.mockResolvedValueOnce({
-      activeSubscription: null
+      activeSubscription: null,
     } as any);
 
     const response = await getServerSideProps({
       req: {
-        cookies: {}
+        cookies: {},
       },
-      params: { slug: 'my-new-post' }
+      params: { slug: 'my-new-post' },
     } as any);
 
     expect(response).toEqual(
       expect.objectContaining({
         redirect: expect.objectContaining({
-          destination: '/'
-        })
-      })
+          destination: '/posts/preview/my-new-post',
+        }),
+      }),
     );
   });
   it('loads initial data', async () => {
@@ -54,21 +54,21 @@ describe('Posts page', () => {
       getByUID: jest.fn().mockResolvedValueOnce({
         data: {
           title: [{ type: 'heading', text: 'My New Post' }],
-          content: [{ type: 'paragraph', text: 'Post content' }]
+          content: [{ type: 'paragraph', text: 'Post content' }],
         },
-        last_publication_date: '07-10-2021'
-      })
+        last_publication_date: '07-10-2021',
+      }),
     } as any);
 
     getSessionMocked.mockResolvedValueOnce({
-      activeSubscription: 'fake-active-subscription'
+      activeSubscription: 'fake-active-subscription',
     });
 
     const response = await getServerSideProps({
       req: {
-        cookies: {}
+        cookies: {},
       },
-      params: { slug: 'my-new-post' }
+      params: { slug: 'my-new-post' },
     } as any);
 
     expect(response).toEqual(
@@ -78,10 +78,10 @@ describe('Posts page', () => {
             slug: 'my-new-post',
             title: 'My New Post',
             content: '<p>Post content</p>',
-            updatedAt: '10 de julho de 2021'
-          }
-        }
-      })
+            updatedAt: '10 de julho de 2021',
+          },
+        },
+      }),
     );
   });
 });

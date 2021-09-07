@@ -19,8 +19,8 @@ export function Async() {
   return (
     <div>
       <div>Hello world</div>
-      <main>{isButtonVisible && <button>Maria</button>}</main>
-      <footer>{!isButtonInvisible && <button>Juliana</button>}</footer>
+      <main>{isButtonVisible && <button type="button">Maria</button>}</main>
+      <footer>{!isButtonInvisible && <button type="button">Juliana</button>}</footer>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QueryClientProvider } from 'react-query';
+import { BrowserRouter } from 'react-router-dom';
 
 import { queryClient } from '../services/queryClient';
 
